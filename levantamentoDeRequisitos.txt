@@ -1,0 +1,42 @@
+PROJETO INDIVIDUAL
+O que quero:
+
+Um website educacional sobre musculação.
+
+Requisitos:
+
+Cadastro e login(Essencial) Fibbonacci:8
+-Deve ser feito com CSS, HTML e JavaScript
+-Deve conter os campos: Gênero, altura, peso, senha e e-mail 
+-Validação de formulário
+-Aplicação da API NodeJS para cadastro e consulta no banco de dados
+
+
+Home(Essencial) Fibbonacci:3
+-Deve ser feito com CSS, HTML e JavaScript
+-Página para contextualizar o projeto
+
+Fórum para sanar dúvidas sobre musculação(Essencial)
+-Deve ser feito com CSS, HTML e JavaScript
+-Usuários devem ser capazes de inserir suas dicas, estudos e evolução sobre musculação(similar à um blog)
+-Aplicação da API NodeJS para consultar e armazenar dados no banco de dados
+
+Jogo educativo(Essencial) Fibbonacci:21
+-Deve ser feito com CSS, HTML e JavaScript
+-Similar ao cookie clicker
+-Aplicação da API NodeJS para consultar e armazenar o progresso no banco de dados
+
+Banco de dados(Essencial) Fibbonacci:5
+-Deve ser feito com MySQL
+-Modelagem com relações (1:1) e (1:N)
+-Script baseado na modelagem
+
+Calculadora de dieta(Importante) Fibbonacci:8
+-Deve ser feito com CSS, HTML e JavaScript
+-Aplicação da API NodeJS para consultar e armazenar dados no banco de dados
+-Deve conter os campos: Gênero, altura, objetivo, peso, idade e nivel de atividade física
+
+Cadastro de alimentos(Desejável) Fibbonacci:21
+-Deve ser feito com CSS, HTML e JavaScript
+-Similar ao aplicativo da Growth
+-Aplicação da API NodeJS para consultar e armazenar dados no banco de dados
