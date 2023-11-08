@@ -9,22 +9,20 @@ Cadastro e login(Essencial) Fibbonacci:8
 -Deve ser feito com CSS, HTML e JavaScript
 -Deve conter os campos: Gênero, altura, peso, senha e e-mail 
 -Validação de formulário
--Aplicação da API NodeJS para cadastro e consulta no banco de dados
+-Aplicação da API NodeJS para cadastro
+e consulta no banco de dados
 
 
 Home(Essencial) Fibbonacci:3
 -Deve ser feito com CSS, HTML e JavaScript
 -Página para contextualizar o projeto
 
-Fórum para sanar dúvidas sobre musculação(Essencial)
+Fórum para sanar dúvidas sobre musculação(Essencial) Fibbonacci: 21
 -Deve ser feito com CSS, HTML e JavaScript
 -Usuários devem ser capazes de inserir suas dicas, estudos e evolução sobre musculação(similar à um blog)
 -Aplicação da API NodeJS para consultar e armazenar dados no banco de dados
 
-Jogo educativo(Essencial) Fibbonacci:21
--Deve ser feito com CSS, HTML e JavaScript
--Similar ao cookie clicker
--Aplicação da API NodeJS para consultar e armazenar o progresso no banco de dados
+
 
 Banco de dados(Essencial) Fibbonacci:5
 -Deve ser feito com MySQL
@@ -40,3 +38,8 @@ Cadastro de alimentos(Desejável) Fibbonacci:21
 -Deve ser feito com CSS, HTML e JavaScript
 -Similar ao aplicativo da Growth
 -Aplicação da API NodeJS para consultar e armazenar dados no banco de dados
+
+Jogo educativo(Essencial) Fibbonacci:21
+-Deve ser feito com CSS, HTML e JavaScript
+-Similar ao cookie clicker
+-Aplicação da API NodeJS para consultar e armazenar o progresso no banco de dados

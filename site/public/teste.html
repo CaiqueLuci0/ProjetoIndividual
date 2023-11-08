@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <canvas id="food_items_line_chart" height="80"></canvas>
+</body>
+</html>
+
+<script>
+    var names2 = ['name1', 'name2'];
+var colors2 = ['orange', 'blue'];
+var data2 = [[10, 20], [20, 30]];
+var dates2 = ['2020-01', '2020-02'];
+
+new Chart('food_items_line_chart', {
+  type: 'line',  
+  data: {
+    labels: dates2,  
+    datasets: dates2.map((ds, i) => ({
+      label: names2[i],
+      data: data2[i],
+      borderColor: colors2[i],
+      borderWidth: 1
+    }))  
+  },
+  options:  {
+    scales: {
+      y: {
+        min: 0        
+      }
+    }
+  }
+});
+</script>
