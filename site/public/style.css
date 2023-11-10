@@ -2,7 +2,7 @@
 *{ 
     padding: 0;
     margin: 0;
-    /* font-family: 'Questrial', sans-serif;  */
+    font-family: 'Questrial', sans-serif; 
     scroll-behavior: smooth;
 } 
 
@@ -25,7 +25,7 @@
     display: flex;
     justify-content: space-between;
     border-bottom: #FFA500 2px solid;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .header h1{
@@ -52,7 +52,7 @@ ul{
 
 li{
     color: #fff;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 300;
     border-bottom: 1px #FFA500 solid;
 }
