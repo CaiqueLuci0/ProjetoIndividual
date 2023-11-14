@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+
+<body>
+    <section class="main">
+        <div class="card">
+            <div class="title">
+                <h1><span class="highlightedWord">H</span>ealthy <span class="highlightedWord">A</span>esthetic</h1>
+            </div>
+            <div id="div_field" class="field">
+                <div>
+                    <h2>Login</h2>
+                    <input id="input_email" placeholder="usuario@exemplo.com">
+                    <input id="input_senha" placeholder="********" type="password">
+                    <span id="span_errormsg" style="color: red;"></span>
+                </div>
+                <button class="next" onclick="login()">Entrar</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+    function login() {
+        var email = input_email.value;
+        var senha = input_senha.value;
+        if (email == "" || senha == "") {
+            span_errormsg = `Campos em branco`;
+        } else {
+            console.log("FORM LOGIN: ", email);
+            console.log("FORM SENHA: ", senha);
+
+            fetch("/usuario/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }) .then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.email = json.email;
+                    sessionStorage.nome = json.nome;
+                    sessionStorage.sobrenome = json.sobrenome;
+                    sessionStorage.senha = json.senha;
+                    sessionStorage.idUsuario = json.idUsuario;
+                    
+                        window.location = "forum.html";
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+                
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    span_errormsg.innerHTML = texto;
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+        };
+    };
+</script>

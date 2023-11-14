@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap'); 
+*{ 
+    padding: 0;
+    margin: 0;
+    font-family: 'Questrial', sans-serif; 
+    scroll-behavior: smooth;
+} 
+
+h1{
+    color: #FFA500;
+}
+
+.header{
+
+    width: 100%;
+    height: 60px;
+    background-color: rgb(44, 41, 41);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #FFA500 2px solid;
+    /* position: fixed; */
+}
+
+.header h1{
+    color: #fff;
+    font-family: Gotham-Medium,sans-serif;
+    font-size: 25px;
+}
+
+.logo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 3%
+}
+
+ul{
+    width: 50%;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 3%;
+}
+
+li{
+    color: #fff;
+    font-size: 17px;
+    font-weight: 300;
+    border-bottom: 1px #FFA500 solid;
+}
+
+.notinteractiveLi{
+    color: #fff;
+    font-size: 35px;
+    font-weight: 300;
+    border-bottom: 0px #fff solid;
+}
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.highlightedWord{
+    color: #FFA500;
+    font-size: 110%;
+}
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12%;
+    height: 40%;
+    background-color: rgb(54, 54, 54);
+    border-radius: 19em;
+}
+
+.page{
+    width: 100%;
+    height: calc(99vh - 60px);
+    background-color: rgb(54, 54, 54);
+    display: flex;
+}
+
+.profile{
+    width: 33.3%;
+    height: 100%;
+    border-right: 2px #fff solid;
+    display: flex;
+    flex-direction: column;
+    color: #FFA500;
+}
+
+.photo2{
+    width: 100%;
+    height: 33.3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.photo{
+    width: 180px;
+    height: 180px;
+    border: solid 1px #fff;
+}
+
+.table{
+    height: 66.6%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.board{
+    width: 66.6%;
+    height: 100%;
+    /* background-color: #FFA500; */
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post{
+    width: 70%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.text{
+    width: 100%;
+    height: fit-content;
+    padding: 2%;
+    background-color: #fff;
+}
+
+.post_image{
+    width: 100%;
+    height: 400px;
+    padding: 2%;
+    background-color: #FFA500
+}
+
+.hidden{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+#input_titulo{
+    width: 90%;
+    height: 50px;
+    padding: 1%;
+    border: 0;
+    border-radius: 1em;
+}
+
+#input_texto{
+    width: 90%;
+    height: 50px;
+    padding: 1%;
+    overflow-y: scroll;
+    border: 0;
+    border-radius: 1em;
+}
+
+.column span{
+    color: #fff;
+}

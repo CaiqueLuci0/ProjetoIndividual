@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="clicker.css">
+    <style>
+        .preco_bonus_descricao {
+            background-color: rgba(0, 0, 0, .6);
+            font-size: 15px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            text-align: center;
+            width: 200px;
+            height: fit-content;
+            border: solid #fff 1px;
+
+        }
+    </style>
+</head>
+
+<body id="body">
+    <section class="main">
+        <div class="container">
+            <div class="clicker">
+                <h1>Pontos: <span id="span_pontos">0</span></h1>
+                <img width="200px" onclick="clickComum()"
+                    src="https://static.wikia.nocookie.net/apenasumshow/images/c/c7/Musculoso.png/revision/latest?cb=20120123200521&path-prefix=pt-br">
+            </div>
+        </div>
+        <div class="container2">
+            <div id="div_powerUpClick" class="powerup" onclick="powerUpclick()">
+                <h1>Melhorar execução dos movimentos</h1>
+
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp"></span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpClick">
+                        <h3>Descrição</h3>
+                        Melhorar a execução potencializa seus ganhos
+                    </div>
+                </div>
+
+            </div>
+            <div id="div_powerUpCreatina" class="powerup" onclick="powerUpCreatina()">
+                <h1>Tomar creatina</h1>
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Segundos para o bônus: <span class="segundosPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp"></span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpCreatina">
+                        <h3>Descrição</h3>
+                        Tomar creatina aumenta consideravelmente sua força e junta água abaixo do tecido muscular. Te
+                        trará benefícios a longo prazo!
+                    </div>
+                </div>
+            </div>
+            <div id="div_powerUpWhey" class="powerup" onclick="powerUpWhey()">
+                <h1>Tomar Whey</h1>
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Segundos para o bônus: <span class="segundosPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp"></span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpWhey">
+                        <h3>Descrição</h3>
+                        Tomar Whey protein ajuda a bater a quantidade necessária do macronutriente proteína! A proteína
+                        é importante para regenerar seus músculos depois de microlesiona-los. Tomar Whey te trará
+                        benefícios a longo prazo!
+                    </div>
+                </div>
+            </div>
+            <div id="div_powerUpCardio" class="powerup" onclick="powerUpCardio()">
+                <h1>Fazer Cárdio</h1>
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Segundos para o bônus: <span class="segundosPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp"></span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpCardio">
+                        <h3>Descrição</h3>
+                        Apesar de ser bem chatinho, o cárdio melhora a sensibilidade dos tecidos do corpo à ação da
+                        insulina, o que provoca melhora do controle glicêmico, pois a insulina é necessária para que a
+                        glicose proveniente dos alimentos seja levada aos tecidos. Fazer cárdio vai melhorar sua
+                        capacidade de queimar gordura parado.
+                    </div>
+                </div>
+            </div>
+            <div id="div_powerUpTreinoPesado" class="powerup" onclick="powerUpTreinoPesado()">
+                <h1>BIIRRRLLL !!!</h1>
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp"></span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpTreinoPesado">
+                        <h3>Descrição</h3>
+                        Treinar pesado aumenta a quantidade de microlesões nos musculos, consequentemente
+                        potencializando o quão maiores eles vão ficar após a recuperação. Seus exercícios ficarão mais
+                        eficientes!
+                    </div>
+                </div>
+            </div>
+            <div class="powerup"></div>
+            <div class="powerup"></div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+    var pontos = 0;
+    var poderDoClick = 1;
+    var poderDoClick2 = 0;
+    var contadorClicks = 0;
+
+    var precos = document.getElementsByClassName('precoPowerUp');
+    var bonus = document.getElementsByClassName('bonusPowerUp');
+
+    function exibirPontos() {
+        span_pontos.innerHTML = parseInt(pontos);
+        setTimeout(exibirPontos, 100);
+    };
+
+    exibirPontos();
+
+    function clickComum() {
+        contadorClicks += 1;
+        pontos += poderDoClick + poderDoClick2;
+    };
+
+
+    //Execução de movimento
+    var custoPowerUpClick = 10;
+    precos[0].innerHTML = custoPowerUpClick;
+    nivelPowerUpExc = 0;
+    function powerUpclick() {
+        if (pontos >= custoPowerUpClick) {
+            if (poderDoClick <= 10) {
+                poderDoClick *= 1.30;
+            } else {
+                poderDoClick *= 1.05;
+            };
+
+            pontos -= custoPowerUpClick;
+            custoPowerUpClick *= 2;
+            bonus[0].innerHTML = (poderDoClick - 1).toFixed(2);
+            precos[0].innerHTML = custoPowerUpClick.toFixed(0);
+            nivelPowerUpExc += 1;
+        };
+    };
+    //Creatina
+    var custoPowerUpCreatina = 100;
+    precos[1].innerHTML = custoPowerUpCreatina;
+    var bonusCreatina = 0;
+    var nivelPowerUpCreatina = 0;
+    function powerUpCreatina() {
+        if (pontos >= custoPowerUpCreatina) {
+            if (bonusCreatina <= 100) {
+                bonusCreatina += 10;
+            } else {
+                bonusCreatina += 5;
+            };
+            pontos -= custoPowerUpCreatina;
+            custoPowerUpCreatina *= 1.20;
+            bonus[1].innerHTML = bonusCreatina.toFixed();
+            precos[1].innerHTML = custoPowerUpCreatina.toFixed();
+            segundos_powerUpCreatina = 10;
+            nivelPowerUpCreatina += 1;
+            if (nivelPowerUpCreatina == 1) {
+                loopPowerUpCreatina();
+            };
+        };
+    };
+    var contadores = document.getElementsByClassName('segundosPowerUp')
+    var segundos_powerUpCreatina = 10;
+    function loopPowerUpCreatina() {
+        contadores[0].innerHTML = segundos_powerUpCreatina;
+        if (segundos_powerUpCreatina == 0) {
+            segundos_powerUpCreatina = 10;
+            pontos += bonusCreatina;
+        }
+        segundos_powerUpCreatina -= 1;
+        setTimeout(loopPowerUpCreatina, 1000);
+    };
+
+    //Whey
+    var custoPowerUpWhey = 1000;
+    precos[2].innerHTML = custoPowerUpWhey;
+    var bonusWhey = 0;
+    var nivelPowerUpWhey = 0;
+    function powerUpWhey() {
+        if (pontos >= custoPowerUpWhey) {
+            if (bonusWhey <= 1000) {
+                bonusWhey += 60;
+            } else {
+                bonusWhey += 30;
+            };
+            pontos -= custoPowerUpWhey
+            custoPowerUpWhey *= 1.20;
+            precos[2].innerHTML = custoPowerUpWhey.toFixed();
+            bonus[2].innerHTML = bonusWhey.toFixed();
+            segundos_powerUpWhey = 30;
+            nivelPowerUpWhey += 1;
+            if (nivelPowerUpWhey == 1) {
+                loopPowerUpWhey();
+            };
+        };
+    };
+
+    function loopPowerUpWhey() {
+        contadores[1].innerHTML = segundos_powerUpWhey;
+        if (segundos_powerUpWhey == 0) {
+            pontos += bonusWhey;
+            segundos_powerUpWhey = 30;
+        };
+        segundos_powerUpWhey -= 1;
+        setTimeout(loopPowerUpWhey, 1000);
+    };
+
+    //Cárdio
+    var custoPowerUpCardio = 10000;
+    precos[3].innerHTML = custoPowerUpCardio;
+    var bonusCardio = 0;
+    var segundos_powerUpCardio = 3;
+    var nivelPowerUpCardio = 0;
+    function powerUpCardio() {
+        if (pontos >= custoPowerUpCardio) {
+            pontos -= custoPowerUpCardio;
+            if (bonusCardio <= 60) {
+                custoPowerUpCardio += 1000;
+                bonusCardio += 6;
+            } else {
+                custoPowerUpCardio += 1500;
+                bonusCardio += 3;
+            }
+            precos[3].innerHTML = custoPowerUpCardio.toFixed();
+            bonus[3].innerHTML = bonusCardio.toFixed();
+            segundos_powerUpCardio = 3;
+            nivelPowerUpCardio += 1;
+            if (nivelPowerUpCardio == 1) {
+                loopPowerUpCardio();
+            };
+        };
+    };
+
+    function loopPowerUpCardio() {
+        contadores[2].innerHTML = segundos_powerUpCardio
+        if (segundos_powerUpCardio == 0) {
+            pontos += bonusCardio;
+            segundos_powerUpCardio = 3;
+        };
+        segundos_powerUpCardio -= 1;
+        setTimeout(loopPowerUpCardio, 1000);
+    };
+
+    //Treino pesado
+
+    var custoPowerUpTpesado = 20000;
+    precos[4].innerHTML = custoPowerUpTpesado;
+    var nivelPowerUpTpesado = 0;
+    function powerUpTreinoPesado() {
+        if (pontos >= custoPowerUpTpesado) {
+            nivelPowerUpTpesado += 1;
+            if (nivelPowerUpTpesado == 1) {
+                poderDoClick2 = 30;
+            } else {
+                if (poderDoClick2 <= 300) {
+                    poderDoClick2 *= 1.30;
+                } else {
+                    poderDoClick2 *= 1.05;
+                };
+            };
+
+            pontos -= custoPowerUpTpesado;
+            custoPowerUpTpesado *= 1.30;
+            bonus[4].innerHTML = (poderDoClick2 - 1).toFixed(2);
+            precos[4].innerHTML = custoPowerUpTpesado.toFixed(0);
+            nivelPowerUpTpesado += 1;
+        };
+    };
+
+    //EXIBIR DESCRIÇÕES
+
+    //Descrição powerUpClick
+    var div_powerUpClick = document.getElementById("div_powerUpClick");
+    var div_descricaoPowerUpClick = document.getElementById("div_descricaoPowerUpClick");
+
+    div_powerUpClick.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+
+        div_descricaoPowerUpClick.style.width = '200px';
+        div_descricaoPowerUpClick.style.height = 'fit-content';
+        div_descricaoPowerUpClick.style.left = (x - div_descricaoPowerUpClick.clientWidth) + "px";
+        div_descricaoPowerUpClick.style.top = y + "px";
+        div_descricaoPowerUpClick.style.opacity = 1;
+    });
+
+    div_powerUpClick.addEventListener("mouseout", function () {
+
+        div_descricaoPowerUpClick.style.width = 0;
+        div_descricaoPowerUpClick.style.height = 0;
+        div_descricaoPowerUpClick.style.overflow = 'hidden';
+        div_descricaoPowerUpClick.style.left = 0 + "px";
+        div_descricaoPowerUpClick.style.top = 0 + "px";
+        div_descricaoPowerUpClick.style.opacity = 0;
+        div_descricaoPowerUpClick.style.opacity = 0;
+    });
+
+    //Descrição powerUpCreatina
+    // div_powerUpCreatina
+    // div_descricaoPowerUpCreatina
+    var div_powerUpCreatina = document.getElementById('div_powerUpCreatina');
+    var div_descricaoPowerUpCreatina = document.getElementById('div_descricaoPowerUpCreatina');
+
+    div_powerUpCreatina.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+
+        div_descricaoPowerUpCreatina.style.width = '200px';
+        div_descricaoPowerUpCreatina.style.height = 'fit-content';
+        div_descricaoPowerUpCreatina.style.left = (x - div_descricaoPowerUpCreatina.clientWidth) + "px";
+        div_descricaoPowerUpCreatina.style.top = y + "px";
+        div_descricaoPowerUpCreatina.style.opacity = 1;
+    });
+
+    div_powerUpCreatina.addEventListener("mouseout", function () {
+        div_descricaoPowerUpCreatina.style.width = 0;
+        div_descricaoPowerUpCreatina.style.height = 0;
+        div_descricaoPowerUpCreatina.style.overflow = 'hidden';
+        div_descricaoPowerUpCreatina.style.left = 0 + "px";
+        div_descricaoPowerUpCreatina.style.top = 0 + "px";
+        div_descricaoPowerUpCreatina.style.opacity = 0;
+    })
+
+    //Descrição powerUpWhey
+
+    var div_powerUpWhey = document.getElementById('div_powerUpWhey');
+    var div_descricaoPowerUpWhey = document.getElementById('div_descricaoPowerUpWhey');
+
+    div_powerUpWhey.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+        div_descricaoPowerUpWhey.style.width = '200px';
+        div_descricaoPowerUpWhey.style.height = 'fit-content';
+        div_descricaoPowerUpWhey.style.left = (x - div_descricaoPowerUpWhey.clientWidth) + "px";
+        div_descricaoPowerUpWhey.style.top = y + "px";
+        div_descricaoPowerUpWhey.style.opacity = 1;
+    });
+
+    div_powerUpWhey.addEventListener("mouseout", function () {
+
+        div_descricaoPowerUpWhey.style.width = 0;
+        div_descricaoPowerUpWhey.style.height = 0;
+        div_descricaoPowerUpWhey.style.overflow = 'hidden';
+        div_descricaoPowerUpWhey.style.left = 0 + "px";
+        div_descricaoPowerUpWhey.style.top = 0 + "px";
+        div_descricaoPowerUpWhey.style.opacity = 0;
+
+    });
+
+    //Descrição powerUpCardio
+    var div_powerUpCardio = document.getElementById('div_powerUpCardio');
+    var div_descricaoPowerUpCardio = document.getElementById('div_descricaoPowerUpCardio');
+
+    div_powerUpCardio.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+
+        div_descricaoPowerUpCardio.style.width = '200px';
+        div_descricaoPowerUpCardio.style.height = 'fit-content';
+        div_descricaoPowerUpCardio.style.left = (x - div_descricaoPowerUpCardio.clientWidth) + "px";
+        div_descricaoPowerUpCardio.style.top = y + "px";
+        div_descricaoPowerUpCardio.style.opacity = 1;
+    });
+
+    div_powerUpCardio.addEventListener("mouseout", function () {
+
+        div_descricaoPowerUpCardio.style.width = 0;
+        div_descricaoPowerUpCardio.style.height = 0;
+        div_descricaoPowerUpCardio.style.overflow = 'hidden';
+        div_descricaoPowerUpCardio.style.left = 0 + "px";
+        div_descricaoPowerUpCardio.style.top = 0 + "px";
+        div_descricaoPowerUpCardio.style.opacity = 0;
+    });
+
+    //Descrição powerUpTreinoPesado
+    var div_powerUpTreinoPesado = document.getElementById('div_powerUpTreinoPesado');
+    var div_descricaoPowerUpTreinoPesado = document.getElementById('div_descricaoPowerUpTreinoPesado');
+
+    div_powerUpTreinoPesado.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+
+        div_descricaoPowerUpTreinoPesado.style.width = '200px';
+        div_descricaoPowerUpTreinoPesado.style.height = 'fit-content';
+        div_descricaoPowerUpTreinoPesado.style.left = (x - div_descricaoPowerUpTreinoPesado.clientWidth) + "px";
+        div_descricaoPowerUpTreinoPesado.style.top = y + "px";
+        div_descricaoPowerUpTreinoPesado.style.opacity = 1;
+    });
+
+    div_powerUpTreinoPesado.addEventListener("mouseout", function () {
+
+        div_descricaoPowerUpTreinoPesado.style.width = 0;
+        div_descricaoPowerUpTreinoPesado.style.height = 0;
+        div_descricaoPowerUpTreinoPesado.style.overflow = 'hidden';
+        div_descricaoPowerUpTreinoPesado.style.left = 0 + "px";
+        div_descricaoPowerUpTreinoPesado.style.top = 0 + "px";
+        div_descricaoPowerUpTreinoPesado.style.opacity = 0;
+    });
+</script>
