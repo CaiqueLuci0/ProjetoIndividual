@@ -19,7 +19,14 @@
             width: 200px;
             height: fit-content;
             border: solid #fff 1px;
+        }
 
+        body{
+            overflow: hidden;
+        }
+
+        .hidden{
+            opacity: 0;
         }
     </style>
 </head>
@@ -90,7 +97,7 @@
                 </div>
             </div>
             <div id="div_powerUpTreinoPesado" class="powerup" onclick="powerUpTreinoPesado()">
-                <h1>BIIRRRLLL !!!</h1>
+                <h1>Treinar pesado</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
                     <b>Bônus: <span class="bonusPowerUp"></span></b>
@@ -102,8 +109,30 @@
                     </div>
                 </div>
             </div>
-            <div class="powerup"></div>
-            <div class="powerup"></div>
+            <div id="div_powerUpDieta" class="powerup" onclick="powerUpDieta()">
+                <h1>Dieta</h1>
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Tempo restante: <span class="segundosPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp">Bônus dobrados !</span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpDieta">
+                        <h3>Descrição</h3>
+                        Uma dieta bem feita é a base para ganhos consistentes. Dobra todos os seus bônus, no entanto é
+                        dificil de manter.
+                    </div>
+                </div>
+            </div>
+            <div id="div_powerUpDisciplina" class="powerup" onclick="powerUpDisciplina()">
+                <h1>Disciplina</h1>
+                <div class="preco_bonus">
+                    <b>Preço: <span class="precoPowerUp"></span></b>
+                    <b>Bônus: <span class="bonusPowerUp">Dieta dura mais tempo</span></b>
+                    <div class="preco_bonus_descricao" id="div_descricaoPowerUpDisciplina">
+                        <h3>Descrição</h3>
+                        Ser disciplinado torna mais facil manter uma dieta.
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </body>
@@ -111,9 +140,15 @@
 </html>
 
 <script>
+    //Variável q aparece na tela
     var pontos = 0;
+    //Variável do primeiro powerUp de click
     var poderDoClick = 1;
+    //Variável do segundo powerUp de click
     var poderDoClick2 = 0;
+    //Váriavel do terceiro powerUp de click
+    var poderDoClick3 = 0;
+    //Contador que vai pro banco para mostrar a qtd de vezes q o usuário clicou
     var contadorClicks = 0;
 
     var precos = document.getElementsByClassName('precoPowerUp');
@@ -128,7 +163,7 @@
 
     function clickComum() {
         contadorClicks += 1;
-        pontos += poderDoClick + poderDoClick2;
+        pontos += poderDoClick + poderDoClick2 + poderDoClick3;
     };
 
 
@@ -247,10 +282,11 @@
     };
 
     function loopPowerUpCardio() {
-        contadores[2].innerHTML = segundos_powerUpCardio
+        contadores[2].innerHTML = segundos_powerUpCardio;
         if (segundos_powerUpCardio == 0) {
             pontos += bonusCardio;
             segundos_powerUpCardio = 3;
+            contadores[2].innerHTML = segundos_powerUpCardio;
         };
         segundos_powerUpCardio -= 1;
         setTimeout(loopPowerUpCardio, 1000);
@@ -276,10 +312,83 @@
 
             pontos -= custoPowerUpTpesado;
             custoPowerUpTpesado *= 1.30;
-            bonus[4].innerHTML = (poderDoClick2 - 1).toFixed(2);
+            bonus[4].innerHTML = (poderDoClick2).toFixed(2);
             precos[4].innerHTML = custoPowerUpTpesado.toFixed(0);
             nivelPowerUpTpesado += 1;
         };
+    };
+
+    var custoPowerUpDieta = 50000;
+    precos[5].innerHTML = custoPowerUpDieta;
+    var segundos_maximosDieta = 30;
+    var segundos_powerUpDieta = segundos_maximosDieta;
+    var dietaAtiva = false;
+    var dietaVezesAtiva = 0;
+    function powerUpDieta() {
+
+        if (dietaAtiva == false) {
+            if (pontos >= custoPowerUpDieta) {
+                pontos -= custoPowerUpDieta;
+                dietaVezesAtiva += 1;
+                dietaAtiva = true;
+                poderDoClick *= 2;
+                bonus[0].innerHTML = (poderDoClick - 1).toFixed();
+
+                poderDoClick2 *= 2;
+                bonus[4].innerHTML = poderDoClick2.toFixed();
+
+                bonusCardio *= 2;
+                bonus[3].innerHTML = bonusCardio.toFixed();
+
+                bonusWhey *= 2
+                bonus[2].innerHTML = bonusWhey.toFixed();
+
+                bonusCreatina *= 2;
+                bonus[1].innerHTML = bonusCreatina.toFixed();
+
+                segundos_powerUpDieta = segundos_maximosDieta;
+                if (dietaVezesAtiva == 1) {
+                    timerPowerUpDieta();
+                };
+            };
+        };
+    };
+
+    function timerPowerUpDieta() {
+        if (dietaAtiva == true) {
+            contadores[3].innerHTML = segundos_powerUpDieta;
+            if (segundos_powerUpDieta == 0) {
+                dietaAtiva = false;
+                poderDoClick /= 2;
+                bonus[0].innerHTML = (poderDoClick - 1).toFixed();
+
+                poderDoClick2 /= 2;
+                bonus[4].innerHTML = poderDoClick2.toFixed();
+
+                bonusCardio /= 2;
+                bonus[3].innerHTML = bonusCardio.toFixed();
+
+                bonusWhey /= 2
+                bonus[2].innerHTML = bonusWhey.toFixed();
+
+                bonusCreatina /= 2;
+                bonus[1].innerHTML = bonusCreatina.toFixed();
+            };
+            segundos_powerUpDieta -= 1;
+        };
+        setTimeout(timerPowerUpDieta, 1000);
+    };
+
+    var custoPowerUpDisciplina = 80000;
+    precos[6].innerHTML = custoPowerUpDisciplina;
+    function powerUpDisciplina(){
+        if(pontos >= custoPowerUpDisciplina){
+            pontos -= custoPowerUpDisciplina;
+            custoPowerUpDisciplina += 5000;
+            precos[6].innerHTML = custoPowerUpDisciplina;
+            segundos_maximosDieta += 10;
+        };
+        
     };
 
     //EXIBIR DESCRIÇÕES
@@ -294,7 +403,7 @@
 
         div_descricaoPowerUpClick.style.width = '200px';
         div_descricaoPowerUpClick.style.height = 'fit-content';
-        div_descricaoPowerUpClick.style.left = (x - div_descricaoPowerUpClick.clientWidth) + "px";
+        div_descricaoPowerUpClick.style.left = (x - div_descricaoPowerUpClick.clientWidth - 20) + "px";
         div_descricaoPowerUpClick.style.top = y + "px";
         div_descricaoPowerUpClick.style.opacity = 1;
     });
@@ -322,7 +431,7 @@
 
         div_descricaoPowerUpCreatina.style.width = '200px';
         div_descricaoPowerUpCreatina.style.height = 'fit-content';
-        div_descricaoPowerUpCreatina.style.left = (x - div_descricaoPowerUpCreatina.clientWidth) + "px";
+        div_descricaoPowerUpCreatina.style.left = (x - div_descricaoPowerUpCreatina.clientWidth - 10) + "px";
         div_descricaoPowerUpCreatina.style.top = y + "px";
         div_descricaoPowerUpCreatina.style.opacity = 1;
     });
@@ -333,7 +442,6 @@
         div_descricaoPowerUpCreatina.style.overflow = 'hidden';
         div_descricaoPowerUpCreatina.style.left = 0 + "px";
         div_descricaoPowerUpCreatina.style.top = 0 + "px";
-        div_descricaoPowerUpCreatina.style.opacity = 0;
     })
 
     //Descrição powerUpWhey
@@ -346,7 +454,7 @@
         var y = event.clientY;
         div_descricaoPowerUpWhey.style.width = '200px';
         div_descricaoPowerUpWhey.style.height = 'fit-content';
-        div_descricaoPowerUpWhey.style.left = (x - div_descricaoPowerUpWhey.clientWidth) + "px";
+        div_descricaoPowerUpWhey.style.left = (x - div_descricaoPowerUpWhey.clientWidth - 10) + "px";
         div_descricaoPowerUpWhey.style.top = y + "px";
         div_descricaoPowerUpWhey.style.opacity = 1;
     });
@@ -358,7 +466,6 @@
         div_descricaoPowerUpWhey.style.overflow = 'hidden';
         div_descricaoPowerUpWhey.style.left = 0 + "px";
         div_descricaoPowerUpWhey.style.top = 0 + "px";
-        div_descricaoPowerUpWhey.style.opacity = 0;
 
     });
 
@@ -372,7 +479,7 @@
 
         div_descricaoPowerUpCardio.style.width = '200px';
         div_descricaoPowerUpCardio.style.height = 'fit-content';
-        div_descricaoPowerUpCardio.style.left = (x - div_descricaoPowerUpCardio.clientWidth) + "px";
+        div_descricaoPowerUpCardio.style.left = (x - div_descricaoPowerUpCardio.clientWidth - 10) + "px";
         div_descricaoPowerUpCardio.style.top = y + "px";
         div_descricaoPowerUpCardio.style.opacity = 1;
     });
@@ -384,7 +491,6 @@
         div_descricaoPowerUpCardio.style.overflow = 'hidden';
         div_descricaoPowerUpCardio.style.left = 0 + "px";
         div_descricaoPowerUpCardio.style.top = 0 + "px";
-        div_descricaoPowerUpCardio.style.opacity = 0;
     });
 
     //Descrição powerUpTreinoPesado
@@ -397,7 +503,7 @@
 
         div_descricaoPowerUpTreinoPesado.style.width = '200px';
         div_descricaoPowerUpTreinoPesado.style.height = 'fit-content';
-        div_descricaoPowerUpTreinoPesado.style.left = (x - div_descricaoPowerUpTreinoPesado.clientWidth) + "px";
+        div_descricaoPowerUpTreinoPesado.style.left = (x - div_descricaoPowerUpTreinoPesado.clientWidth - 10) + "px";
         div_descricaoPowerUpTreinoPesado.style.top = y + "px";
         div_descricaoPowerUpTreinoPesado.style.opacity = 1;
     });
@@ -409,6 +515,53 @@
         div_descricaoPowerUpTreinoPesado.style.overflow = 'hidden';
         div_descricaoPowerUpTreinoPesado.style.left = 0 + "px";
         div_descricaoPowerUpTreinoPesado.style.top = 0 + "px";
-        div_descricaoPowerUpTreinoPesado.style.opacity = 0;
+    });
+
+    // Dieta 
+
+    var div_powerUpDieta = document.getElementById('div_powerUpDieta');
+    var div_descricaoPowerUpDieta = document.getElementById('div_descricaoPowerUpDieta');
+
+    div_powerUpDieta.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+
+        div_descricaoPowerUpDieta.style.width = '200px';
+        div_descricaoPowerUpDieta.style.height = 'fit-content';
+        div_descricaoPowerUpDieta.style.left = (x - div_descricaoPowerUpDieta.clientWidth - 10) + "px";
+        div_descricaoPowerUpDieta.style.top = y + "px";
+        div_descricaoPowerUpDieta.style.opacity = 1;
+    });
+
+    div_powerUpDieta.addEventListener("mouseout", function () {
+
+        div_descricaoPowerUpDieta.style.width = 0;
+        div_descricaoPowerUpDieta.style.height = 0;
+        div_descricaoPowerUpDieta.style.overflow = 'hidden';
+        div_descricaoPowerUpDieta.style.left = 0 + "px";
+        div_descricaoPowerUpDieta.style.top = 0 + "px";
+    });
+
+    var div_powerUpDisciplina = document.getElementById('div_powerUpDisciplina');
+    var div_descricaoPowerUpDisciplina = document.getElementById('div_descricaoPowerUpDisciplina');
+
+    div_powerUpDisciplina.addEventListener("mouseover", function (event) {
+        var x = event.clientX;
+        var y = event.clientY;
+
+        div_descricaoPowerUpDisciplina.style.width = '200px';
+        div_descricaoPowerUpDisciplina.style.height = 'fit-content';
+        div_descricaoPowerUpDisciplina.style.left = (x - div_descricaoPowerUpDisciplina.clientWidth - 10) + "px";
+        div_descricaoPowerUpDisciplina.style.top = (y - 10) + "px";
+        div_descricaoPowerUpDisciplina.style.opacity = 1;
+    });
+
+    div_powerUpDisciplina.addEventListener("mouseout", function () {
+
+        div_descricaoPowerUpDisciplina.style.width = 0;
+        div_descricaoPowerUpDisciplina.style.height = 0;
+        div_descricaoPowerUpDisciplina.style.overflow = 'hidden';
+        div_descricaoPowerUpDisciplina.style.left = 0 + "px";
+        div_descricaoPowerUpDisciplina.style.top = 0 + "px";
     });
 </script>

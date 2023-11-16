@@ -1,5 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
-var routerUsuario = require("../routes/usuario")
+// var routerUsuario = require("../routes/usuario")
 // var config = require ("../database/config");
 // // var conexao = mysql.createConnection(mySqlConfig);
 

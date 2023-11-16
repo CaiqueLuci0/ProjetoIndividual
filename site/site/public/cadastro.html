@@ -159,7 +159,7 @@
         var confSenha = input_passwordConfirm.value;
 
         if (confSenha != senha) {
-            span_errormsg = `As senhas devem ser iguais`
+            span_errormsg.innerHTML= `As senhas devem ser iguais`
         } else {
             var nomePH = ['Caio', 'Fernando', 'Vivian', 'Thiago', 'Mônica', 'Eduardo'];
             var sobrenomePH = ['Henrique', 'Brandão', 'Silva', 'Gomes', 'Herrero', 'Verri']
@@ -226,12 +226,12 @@
             sobrenomeVar.indexOf('8') > -1 ||
             sobrenomeVar.indexOf('9') > -1
         ) {
-            span_errormsg.innerHTML = `Ambos os campos não podem conter números`
+            span_errormsg.innerHTML = `Não pode conter números`
         } else if (
             nomeVar.length < 2 ||
             sobrenomeVar.length < 2
         ) {
-            span_errormsg.innerHTML = `Nome ou sobrenome muito curtos`
+            span_errormsg.innerHTML = `Nome muito curto`
         } else {
             field.classList.remove('field')
             div_field.innerHTML = `
