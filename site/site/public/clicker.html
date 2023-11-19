@@ -19,25 +19,29 @@
             width: 200px;
             height: fit-content;
             border: solid #fff 1px;
+            color: #fff;
+        }
+        .preco_bonus_descricao h3{
+            color: #fff;
         }
 
         body{
             overflow: hidden;
         }
 
-        .hidden{
-            opacity: 0;
-        }
     </style>
 </head>
 
 <body id="body">
     <section class="main">
         <div class="container">
+            <div class="container_botao">
+                <div id="botao_enviarProBanco" onclick="EnviarParaOBanco()">Encerrar sessão</div>
+            </div>
             <div class="clicker">
-                <h1>Pontos: <span id="span_pontos">0</span></h1>
-                <img width="200px" onclick="clickComum()"
-                    src="https://static.wikia.nocookie.net/apenasumshow/images/c/c7/Musculoso.png/revision/latest?cb=20120123200521&path-prefix=pt-br">
+                <h1 style="color: green ;">Pontos: <span id="span_pontos" style="color: #fff;">0</span></h1>
+                <img id="personagem" style="width: 100px; height:300px; cursor: pointer;" onclick="clickComum()"
+                    src="assets/img/estagio1.png">
             </div>
         </div>
         <div class="container2">
@@ -146,10 +150,12 @@
     var poderDoClick = 1;
     //Variável do segundo powerUp de click
     var poderDoClick2 = 0;
-    //Váriavel do terceiro powerUp de click
-    var poderDoClick3 = 0;
     //Contador que vai pro banco para mostrar a qtd de vezes q o usuário clicou
     var contadorClicks = 0;
+
+    //imagens que o usuario clica
+    var personagem = document.getElementById('personagem');
+    var estagios = ['assets/img/estagio2.png', 'assets/img/estagioFinal.png'];
 
     var precos = document.getElementsByClassName('precoPowerUp');
     var bonus = document.getElementsByClassName('bonusPowerUp');
@@ -157,13 +163,23 @@
     function exibirPontos() {
         span_pontos.innerHTML = parseInt(pontos);
         setTimeout(exibirPontos, 100);
+
+        if(contadorClicks >= 10000){
+            personagem.src = estagios[1];
+            personagem.style.width = '600px';
+            personagem.style.height = '600px';
+        } else if (contadorClicks >= 5000){
+            personagem.src = estagios[0];
+            personagem.style.width = '600px';
+            personagem.style.height = '600px';
+        };
     };
 
     exibirPontos();
 
     function clickComum() {
         contadorClicks += 1;
-        pontos += poderDoClick + poderDoClick2 + poderDoClick3;
+        pontos += poderDoClick + poderDoClick2;
     };
 
 
@@ -180,7 +196,7 @@
             };
 
             pontos -= custoPowerUpClick;
-            custoPowerUpClick *= 2;
+            custoPowerUpClick *= 1.35;
             bonus[0].innerHTML = (poderDoClick - 1).toFixed(2);
             precos[0].innerHTML = custoPowerUpClick.toFixed(0);
             nivelPowerUpExc += 1;
@@ -222,7 +238,7 @@
     };
 
     //Whey
-    var custoPowerUpWhey = 1000;
+    var custoPowerUpWhey = 600;
     precos[2].innerHTML = custoPowerUpWhey;
     var bonusWhey = 0;
     var nivelPowerUpWhey = 0;
@@ -256,7 +272,7 @@
     };
 
     //Cárdio
-    var custoPowerUpCardio = 10000;
+    var custoPowerUpCardio = 1000;
     precos[3].innerHTML = custoPowerUpCardio;
     var bonusCardio = 0;
     var segundos_powerUpCardio = 3;
@@ -265,7 +281,7 @@
         if (pontos >= custoPowerUpCardio) {
             pontos -= custoPowerUpCardio;
             if (bonusCardio <= 60) {
-                custoPowerUpCardio += 1000;
+                custoPowerUpCardio *= 1.30;
                 bonusCardio += 6;
             } else {
                 custoPowerUpCardio += 1500;
@@ -294,7 +310,7 @@
 
     //Treino pesado
 
-    var custoPowerUpTpesado = 20000;
+    var custoPowerUpTpesado = 5000;
     precos[4].innerHTML = custoPowerUpTpesado;
     var nivelPowerUpTpesado = 0;
     function powerUpTreinoPesado() {
@@ -318,7 +334,7 @@
         };
     };
 
-    var custoPowerUpDieta = 50000;
+    var custoPowerUpDieta = 20000;
     precos[5].innerHTML = custoPowerUpDieta;
     var segundos_maximosDieta = 30;
     var segundos_powerUpDieta = segundos_maximosDieta;
@@ -379,14 +395,17 @@
         setTimeout(timerPowerUpDieta, 1000);
     };
 
-    var custoPowerUpDisciplina = 80000;
+    var custoPowerUpDisciplina = 10000;
     precos[6].innerHTML = custoPowerUpDisciplina;
+    var nivelDisciplina = 0
     function powerUpDisciplina(){
         if(pontos >= custoPowerUpDisciplina){
+            nivelDisciplina += 1;
             pontos -= custoPowerUpDisciplina;
-            custoPowerUpDisciplina += 5000;
+            custoPowerUpDisciplina += 2000;
             precos[6].innerHTML = custoPowerUpDisciplina;
             segundos_maximosDieta += 10;
+            segundos_powerUpDieta += 10;
         };
         
     };
@@ -542,6 +561,7 @@
         div_descricaoPowerUpDieta.style.top = 0 + "px";
     });
 
+    // Disciplina
     var div_powerUpDisciplina = document.getElementById('div_powerUpDisciplina');
     var div_descricaoPowerUpDisciplina = document.getElementById('div_descricaoPowerUpDisciplina');
 

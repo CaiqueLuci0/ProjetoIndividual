@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap'); 
+*{ 
+    padding: 0;
+    margin: 0;
+    font-family: 'Questrial', sans-serif; 
+    scroll-behavior: smooth;
+} 
+
+.main{
+    width: 100%;
+    height: 100vh;
+}
+
+.header{
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(
+        90deg,
+        rgb(89, 1, 1),
+        #f8001d
+        
+    );
+    background-size: cover;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#foto_usuario{
+    width: 50px;
+    height: 50px;
+    border: solid 3px gold;
+    margin-right: 10px;
+}
+
+.foto_nome{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.kpis{
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.niveis{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.divisaoNiveis{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nivel{
+    width: 30%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(230, 230, 230);
+    padding: 1%;
+    border-radius: 1em;
+}
+
+.iconePW{
+    width: 100px;
+    height: 100px;
+}
+
+.conquistas{
+    width: 40%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.botoes{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.botao{
+    background-color: #fe2b43;
+    width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gold;
+    cursor: pointer;
+
+}
+
+.container_conquistas{
+    width: 90%;
+    height: 100%;
+    background-color: rgb(230, 230, 230);
+    border-radius: 1em;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.conquista{
+    margin-top: 1%;
+    background-color: #fff;
+    width: 90%;
+    height: 100px;
+    border-radius: 1em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.iconeConquista{
+    width: 90px;
+    height: 90px;
+    border: gold solid 2px;
+    border-radius: 19em;
+    margin-right: 50px;
+}
+
+.conteudoConquista{
+    width: 60%;
+    height: 90%;
+    display: flex;
+    background-color: rgb(230, 230, 230);
+    border-radius: 1em;
+    padding-left: 2%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}

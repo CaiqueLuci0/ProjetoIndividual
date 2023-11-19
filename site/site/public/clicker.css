@@ -5,8 +5,25 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Questrial', sans-serif;
-    color: #fff;
+    color: rgb(100, 100, 100);
 }
+
+#botao_enviarProBanco{
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    justify-self: flex-start;
+    background-color: green;
+    border: solid 2px rgb(105, 234, 105);
+    border-radius: 3em;
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 .main{
     width: 100%;
     height: 100vh;
@@ -18,16 +35,24 @@
     width: 60%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background-image: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ac4257f1-2f82-40fc-8fed-a2e14c7c6400/d9skkg9-ab13c165-5601-498a-94a1-1b3597b49cf0.jpg/v1/fill/w_1024,h_792,q_75,strp/regular_show_casa_by_frankro_d9skkg9-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzkyIiwicGF0aCI6IlwvZlwvYWM0MjU3ZjEtMmY4Mi00MGZjLThmZWQtYTJlMTRjN2M2NDAwXC9kOXNra2c5LWFiMTNjMTY1LTU2MDEtNDk4YS05NGExLTFiMzU5N2I0OWNmMC5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.NRcr8I0TFJFCBu03MCMNywQBv64NeEPU6OC_oNWW7Pg);
+    background-image: url(assets/img/gymBg1jpeg.jpeg);
     background-size: cover;
+}
+
+.container_botao{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .container2{
     width: 40%;
     height: 100%;
-    border-left: solid 1px #fff;
+    border-left: solid 2px rgb(100, 100, 100);
     display: flex;
     flex-direction: column;
 }
@@ -35,10 +60,12 @@
 .powerup{
     width: 100%;
     height: 16.66%;
-    border-bottom: solid 1px #fff;
+    background-image: url(assets/img/pedra.png);
+    border-bottom: solid 5px rgb(100, 100, 100);
     color: #fff;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
     justify-content: space-between;
 }
 
