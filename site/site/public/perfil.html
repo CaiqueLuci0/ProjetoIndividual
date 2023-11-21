@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
     <link rel="stylesheet" href="perfil.css">
 </head>
-<body>
+
+<body onload="exibirUserName(), exibirPontos()">
     <section class="main">
         <div class="header">
             <div class="foto_nome">
-                <img id="foto_usuario" src="assets/img/shanghai.png"> 
+                <img id="foto_usuario" src="assets/img/shanghai.png">
                 <h1>
                     <span id="span_userName">UserName</span>#<span id="spanId">0001</span>
                 </h1>
@@ -18,134 +20,343 @@
         </div>
         <div class="kpis">
             <div class="niveis">
-                 <!-- nivelPowerUpExc nivelPowerUpCreatina nivelPowerUpWhey nivelPowerUpCardio nivelPowerUpTpesado dietaVezesAtiva nivelDisciplina -->
-                 <div class="divisaoNiveis">
+                <!-- nivelPowerUpExc nivelPowerUpCreatina nivelPowerUpWhey nivelPowerUpCardio nivelPowerUpTpesado dietaVezesAtiva nivelDisciplina -->
+                <div class="divisaoNiveis">
                     <div class="nivel">
                         <h3>Melhoria de execução</h3>
                         <img class="iconePW" src="assets/img/execucao.png">
                         <h3>Nível: <span id="span_nivelExecucao">0</span></h3>
-                     </div>
-                     <div class="nivel">
+                    </div>
+                    <div class="nivel">
                         <h3>Melhoria de Creatina</h3>
                         <img class="iconePW" src="assets/img/creatina.png">
                         <h3>Nível: <span id="span_nivelCreatina">0</span></h3>
-                     </div>
-                     <div class="nivel">
+                    </div>
+                    <div class="nivel">
                         <h3>Melhoria de Whey</h3>
                         <img class="iconePW" src="assets/img/whey.png">
                         <h3>Nível: <span id="span_nivelWhey">0</span></h3>
-                     </div>
-                 </div>
-                 
-                 <div class="divisaoNiveis">
+                    </div>
+                </div>
+
+                <div class="divisaoNiveis">
                     <div class="nivel">
                         <h3>Melhoria de Cardio</h3>
                         <img class="iconePW" src="assets/img/cardio.png">
                         <h3>Nível: <span id="span_nivelCardio">0</span></h3>
-                     </div>
-                     <div class="nivel">
+                    </div>
+                    <div class="nivel">
                         <h3>Melhoria de Dieta</h3>
                         <img class="iconePW" src="assets/img/dieta.png">
                         <h3>Nível: <span id="span_nivelDieta">0</span></h3>
-                     </div>
-                     <div class="nivel">
+                    </div>
+                    <div class="nivel">
                         <h3>Treino Pesado</h3>
                         <img class="iconePW" src="assets/img/treinoPesado.png">
                         <h3>Nível: <span id="span_nivelTreino">0</span></h3>
-                     </div>
-                 </div>
+                    </div>
+                </div>
 
-                 <div class="divisaoNiveis">
+                <div class="divisaoNiveis">
                     <div class="nivel">
                         <h3>Melhoria de Disciplina</h3>
                         <img class="iconePW" src="assets/img/disciplina.png">
-                        <h3>Nível: <span id="span_nivelCardio">0</span></h3>
-                     </div>
-                     <div class="nivel">
+                        <h3>Nível: <span id="span_nivelDisciplina">0</span></h3>
+                    </div>
+                    <div class="nivel">
                         <h3>Quantidade de clicks</h3>
                         <img class="iconePW" src="assets/img/click.png">
-                        <h3><span id="span_nivelDieta">0</span> clicks</h3>
-                     </div>
-                     <div class="nivel">
+                        <h3><span id="span_qtdClicks">0</span> clicks</h3>
+                    </div>
+                    <div class="nivel">
                         <h3>Highscore</h3>
                         <img class="iconePW" src="assets/img/highscore.png">
-                        <h3><span id="span_nivelTreino">0</span> pontos</h3>
-                     </div>
-                 </div>
+                        <h3><span id="span_pontos">0</span> pontos</h3>
+                    </div>
+                </div>
             </div>
             <div class="conquistas">
                 <div class="botoes">
                     <div class="botao">Leaderboard</div>
-                    <div class="botao">Novo Jogo</div>
+                    <div onclick="chamarClicker()" class="botao">Novo Jogo</div>
                 </div>
                 <h1>Conquistas</h1>
                 <div id="container_conquistas" class="container_conquistas">
-                    <div class="conquista">
-                        <img class="iconeConquista" src="assets/img/cardioNvl10.gif" alt="">
-                        <div class="conteudoConquista">
-                            <h4>Rocky Balboa</h4>
-                            <span>Alcançou nível 10 de cárdio!</span>
-                        </div>
-                    </div>
-                    <div class="conquista">
-                        <img class="iconeConquista" src="assets/img/cardioNvl5.gif" alt="">
-                        <div class="conteudoConquista">
-                            <h4>Adonis Creed</h4>
-                            <span>Alcançou nível 5 de cárdio!</span>
-                        </div>
-                    </div>
-                    <div class="conquista">
-                        <img class="iconeConquista" src="assets/img/execucaoNvl10.gif" alt="">
-                        <div class="conteudoConquista">
-                            <h4>Nerdola Supremo</h4>
-                            <span>Alcançou nível 10 de execução de movimento!</span>
-                        </div>
-                    </div>
-                    <div class="conquista">
-                        <img class="iconeConquista" src="assets/img/execucaoNvl5.webp" alt="">
-                        <div class="conteudoConquista">
-                            <h4>Estudioso</h4>
-                            <span>Alcançou nível 5 de execução de movimento!</span>
-                        </div>
-                    </div>
-                    <div class="conquista">
+                    <!-- as conquistas aparecerão via JS  -->
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+
+    function exibirPontos() {
+        fetch("/highScore/verificarSave", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.status == 201) {
+                    // exibir tudo bonitinho e validar as conquistas
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.clicksUsuario = json.qtdClicks;
+                        sessionStorage.pontosUsuario = json.qtdPontos;
+                    });
+                    span_qtdClicks.innerHTML = sessionStorage.clicksUsuario;
+                    span_pontos.innerHTML = sessionStorage.pontosUsuario;
+
+                    exibirNiveis();
+                } else if (resposta.status == 204) {
+                    // avisar que ele ainda não tem save
+                    alert('Você ainda não jogou nenhúma vez, por isso todos os seus níveis estão em 0');
+                } else {
+                    alert('erro 500');
+                }
+            }
+        );
+    };
+
+    function exibirNiveis() {
+        fetch("/highScore/exibirNiveis", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.status == 201) {
+                    
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.nivelCardio = json[0].nivel;
+                        sessionStorage.nivelCreatina = json[1].nivel;
+                        sessionStorage.nivelDieta = json[2].nivel;
+                        sessionStorage.nivelDisciplina = json[3].nivel;
+                        sessionStorage.nivelExecucao = json[4].nivel;
+                        sessionStorage.nivelPesado = json[5].nivel;
+                        sessionStorage.nivelWhey = json[6].nivel;
+                    });
+
+                    validarConquistas();
+                }
+            }
+        );
+    };
+
+    function validarConquistas() {
+        var nvlCardio = Number(sessionStorage.nivelCardio);
+        var nvlCreatina = Number(sessionStorage.nivelCreatina);
+        var nvlDieta = Number(sessionStorage.nivelDieta);
+        var nvlDisciplina = Number(sessionStorage.nivelDisciplina);
+        var nvlExecucao = Number(sessionStorage.nivelExecucao);
+        var nvlPesado = Number(sessionStorage.nivelPesado);
+        var nvlWhey = Number(sessionStorage.nivelWhey);
+        var qtdClicks = Number(sessionStorage.clicksUsuario);
+
+        span_nivelExecucao.innerHTML = nvlExecucao;
+        span_nivelCreatina.innerHTML = nvlCreatina;
+        span_nivelCardio.innerHTML = nvlCardio;
+        span_nivelDieta.innerHTML = nvlDieta;
+        span_nivelDisciplina.innerHTML = nvlDisciplina;
+        span_nivelTreino.innerHTML = nvlPesado;
+        span_nivelWhey.innerHTML = nvlWhey;
+
+        if (nvlCardio >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                <img class="iconeConquista" src="assets/img/cardioNvl10.gif" alt="">
+                <div class="conteudoConquista">
+                    <h4>Rocky Balboa</h4>
+                    <span>Alcançou nível 10 de cárdio!</span>
+                </div>
+            </div>
+            `
+        };
+
+        if (nvlCardio >= 5) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                    <img class="iconeConquista" src="assets/img/cardioNvl5.gif" alt="">
+                <div class="conteudoConquista">
+                    <h4>Adonis Creed</h4>
+                    <span>Alcançou nível 5 de cárdio!</span>
+                </div>
+            </div>
+            `
+        };
+
+        if (nvlCreatina >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
                         <img class="iconeConquista" src="assets/img/creatinaNvl10.gif" alt="">
                         <div class="conteudoConquista">
                             <h4>Inchadão</h4>
                             <span>Alcançou nível 10 no uso de creatina!</span>
                         </div>
                     </div>
-                    <div class="conquista">
+            `
+        };
+
+        if (nvlExecucao >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/execucaoNvl10.gif" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Nerdola Supremo</h4>
+                            <span>Alcançou nível 10 de execução de movimento!</span>
+                        </div>
+                    </div>
+            `
+        };
+
+        if (nvlExecucao >= 5) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/execucaoNvl5.webp" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Estudioso</h4>
+                            <span>Alcançou nível 5 de execução de movimento!</span>
+                        </div>
+                    </div>
+            `
+        };
+
+        if (nvlWhey >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
                         <img class="iconeConquista" src="assets/img/wheyNvl10.gif" alt="">
                         <div class="conteudoConquista">
                             <h4>Malucão dos suplementos</h4>
                             <span>Alcançou nível 10 no uso de whey!</span>
                         </div>
                     </div>
-                    <div class="conquista">
+            `
+        };
+
+        if (nvlWhey >= 5) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
                         <img class="iconeConquista" src="assets/img/wheyNvl5.gif" alt="">
                         <div class="conteudoConquista">
                             <h4>Afim de ter resultado</h4>
                             <span>Alcançou nível 5 no uso de whey!</span>
                         </div>
                     </div>
-                    <div class="conquista">
+            `
+        };
+
+        if (nvlDieta >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
                         <img class="iconeConquista" src="assets/img/dietaNvl10.gif" alt="">
                         <div class="conteudoConquista">
                             <h4>Rei do bulking</h4>
                             <span>Alcançou nível 10 em fazer dieta!</span>
                         </div>
                     </div>
-                    <div class="conquista">
+            `
+        };
+
+        if (nvlDieta >= 5) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
                         <img class="iconeConquista" src="assets/img/dietaNivel5.gif" alt="">
                         <div class="conteudoConquista">
                             <h4>Empenhado</h4>
                             <span>Alcançou nível 5 em fazer dieta!</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</body>
-</html>
+            `
+        };
+
+        if (nvlPesado >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/pesadoNvl10.gif" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Light weight, baby!</h4>
+                            <span>Alcançou nível 10 de treino pesado!</span>
+                        </div>
+                    </div>
+            `
+        };
+
+        if (nvlDisciplina >= 5) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/disciplinaNvl5.jpeg" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Focado</h4>
+                            <span>Alcançou nível 5 de disciplina!</span>
+                        </div>
+                    </div>
+            `
+        };
+
+        if (nvlDisciplina >= 10) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/disciplinaNvl10.gif" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Monge</h4>
+                            <span>Alcançou nível 10 de disciplina!</span>
+                        </div>
+                    </div>
+            `
+        };
+
+        if (qtdClicks >= 5000) {
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/click5000.gif" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Doido</h4>
+                            <span>Clicou 5000 vezes ou mais!</span>
+                        </div>
+                    </div> 
+            `
+        };
+
+        if(qtdClicks >= 10000){
+            container_conquistas.innerHTML += `
+            <div class="conquista">
+                        <img class="iconeConquista" src="assets/img/click10000.png" alt="">
+                        <div class="conteudoConquista">
+                            <h4>Console</h4>
+                            <span>Clicou 10000 vezes ou mais! <br>
+                                (Eu sei que você não clicou tudo isso...)</span>
+                        </div>
+                    </div>
+            `
+        };
+
+    };
+
+    function exibirUserName() {
+        var nome = sessionStorage.nome;
+        var sobrenome = sessionStorage.sobrenome;
+        span_userName.innerHTML = nome + '_' + sobrenome.replaceAll(" ", "_");
+        var id = sessionStorage.idUsuario;
+        spanId.innerHTML = id
+    }
+
+    function chamarClicker() {
+        window.location.href = "clicker.html"
+    }
+</script>

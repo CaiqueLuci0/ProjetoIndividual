@@ -23,7 +23,19 @@ function cadastrar(nome, email, senha, sobrenome, dtNasc) {
     return database.executar(instrucao);
 }
 
+function verificarEmail(email){
+    console.log("Estou no usuarioModel");
+
+    var instrucao = `
+        SELECT email FROM usuario WHERE email = '${email}';
+    `
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
 module.exports = {
+    verificarEmail,
     autenticar,
     cadastrar
 };

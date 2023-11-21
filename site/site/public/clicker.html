@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="clicker.css">
+
     <style>
         .preco_bonus_descricao {
             background-color: rgba(0, 0, 0, .6);
@@ -21,12 +22,60 @@
             border: solid #fff 1px;
             color: #fff;
         }
-        .preco_bonus_descricao h3{
+
+        .preco_bonus_descricao h3 {
             color: #fff;
         }
 
-        body{
+        body {
             overflow: hidden;
+        }
+
+        .pergunta{
+            width: 0;
+            height: 0;
+            position: absolute;
+            overflow: hidden;
+            background-color:rgba(0, 0, 0, .6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .pergunta h1{
+            font-size: 60px;
+            color: #fff;
+        }
+
+        .botoes{
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .botoes button{
+            width: 200px;
+            height: 60px;
+            border: solid 1px #fff;
+            border-radius: 19em;
+            color: #fff;
+            font-size: 30px;
+            background-color: #ffffff00;
+            cursor: pointer;
+        }
+
+        .botoes button:hover{
+            width: 200px;
+            height: 60px;
+            border: solid 1px #fff;
+            border-radius: 19em;
+            color: #fff;
+            font-size: 30px;
+            background-color: green;
+            cursor: pointer;
         }
 
     </style>
@@ -138,12 +187,147 @@
                 </div>
             </div>
         </div>
+        <div class="pergunta" id="div_pergunta">
+            <h1>
+                Você já tem um save! <br>
+                deseja sobreescreve-lo?
+            </h1>
+            <div class="botoes">
+                <button onclick="apagarPowerUps()">Sim</button>
+                <button onclick="voltarTela()">Não</button>
+            </div>
+        </div>
     </section>
+
 </body>
 
 </html>
 
 <script>
+
+    // cadastrando pontuação e níveis no banco
+    function EnviarParaOBanco() {
+        fetch("/highScore/verificarSave", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.status == 201) {
+                    // Perguntar se o usuário quer sobreescrever o save
+                    var pergunta = document.getElementById('div_pergunta');
+                    pergunta.style.width = '100%';
+                    pergunta.style.height = '100vh';
+                } else if (resposta.status == 204) {
+                    // Salvar
+                    cadastrarHighScore();
+                } else {
+                    alert('erro 500');
+                }
+            }
+        );
+    };
+
+    function sobrescrever(){
+        fetch("/highScore/apagarHighScore", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario,
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.ok) {
+                    EnviarParaOBanco();
+                };
+            }
+        );
+    };
+
+    function voltarTela(){
+        window.location = 'perfil.html'
+    }
+
+    function apagarPowerUps(){
+        fetch("/highScore/apagarPowerUps", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario,
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.ok) {
+                    sobrescrever();
+                };
+            }
+        );
+    }
+
+    function cadastrarHighScore() {
+        console.log('Estou no cadastrar HighScore do front')
+        // nivelPowerUpExc nivelPowerUpCreatina nivelPowerUpWhey nivelPowerUpCardio nivelPowerUpTpesado dietaVezesAtiva nivelDisciplina
+        fetch("/highScore/cadastrarHighScore", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario,
+                qtdClicks: contadorClicks,
+                pontosServer: pontos
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.ok) {
+                    cadastrarPowerUps();
+                };
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro.sqlMessage);
+                ('Erro ao se comunicar com o servidor!');
+            }
+        );
+    };
+
+    function cadastrarPowerUps() {
+        fetch("/highScore/cadastrarPowerUps", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idServer: sessionStorage.idUsuario,
+                execucao: nivelPowerUpExc,
+                creatina: nivelPowerUpCreatina,
+                whey: nivelPowerUpWhey,
+                cardio: nivelPowerUpCardio,
+                treino: nivelPowerUpTpesado,
+                dieta: dietaVezesAtiva,
+                disciplina: nivelDisciplina
+            })
+        }).then(
+            function (resposta) {
+                if (resposta.ok) {
+                    window.location.href = 'perfil.html'
+                };
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro.sqlMessage);
+                ('Erro ao se comunicar com o servidor!');
+            }
+        );
+    };
     //Variável q aparece na tela
     var pontos = 0;
     //Variável do primeiro powerUp de click
@@ -164,11 +348,11 @@
         span_pontos.innerHTML = parseInt(pontos);
         setTimeout(exibirPontos, 100);
 
-        if(contadorClicks >= 10000){
+        if (contadorClicks >= 10000) {
             personagem.src = estagios[1];
             personagem.style.width = '600px';
             personagem.style.height = '600px';
-        } else if (contadorClicks >= 5000){
+        } else if (contadorClicks >= 5000) {
             personagem.src = estagios[0];
             personagem.style.width = '600px';
             personagem.style.height = '600px';
@@ -334,6 +518,8 @@
         };
     };
 
+    // Dieta
+
     var custoPowerUpDieta = 20000;
     precos[5].innerHTML = custoPowerUpDieta;
     var segundos_maximosDieta = 30;
@@ -398,8 +584,8 @@
     var custoPowerUpDisciplina = 10000;
     precos[6].innerHTML = custoPowerUpDisciplina;
     var nivelDisciplina = 0
-    function powerUpDisciplina(){
-        if(pontos >= custoPowerUpDisciplina){
+    function powerUpDisciplina() {
+        if (pontos >= custoPowerUpDisciplina) {
             nivelDisciplina += 1;
             pontos -= custoPowerUpDisciplina;
             custoPowerUpDisciplina += 2000;
@@ -407,7 +593,7 @@
             segundos_maximosDieta += 10;
             segundos_powerUpDieta += 10;
         };
-        
+
     };
 
     //EXIBIR DESCRIÇÕES

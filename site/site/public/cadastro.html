@@ -37,7 +37,7 @@
     var field = document.getElementById('div_field');
 
     function campoSenha() {
-        var emailVar = input_email.value;
+        var emailVar = (input_email.value).toLocaleUpperCase();
         var posicaoArroba = false;
         for (var index = 0; index < emailVar.length; index++) {
             if (emailVar[index] == '@') {
@@ -46,27 +46,46 @@
             };
         };
         if (
-            emailVar.indexOf('.com') < emailVar.length - 4 ||
+            emailVar.indexOf('.COM') < emailVar.length - 4 ||
             posicaoArroba == false ||
             index < 1
         ) {
             span_errormsg.innerHTML = `E-mail inválido`;
         } else {
-            field.classList.remove('field');
-            div_field.innerHTML = `
-                <div>
-                    <h2>Senha</h2>
-                    <input id="input_password" onkeyup="verificarSenha()" type="password" placeholder="********">
-                    <span id="span_errormsg" style="color: red;"></span>
-                </div>
-                <div class="buttons">
-                    <button class="back" onclick="voltarCampoEmail()">Voltar</button>
-                    <button class="next" onclick="campoConfirmarSenha()">Próximo</button>
-                </div>
-            `;
-            field.classList.add('field');
 
-            email = emailVar;
+            fetch("/usuario/verificarEmail", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    emailVerificado: emailVar,
+                })
+            }).then(function (resposta) {
+                if (resposta.status == 400) {
+                    span_errormsg.innerHTML = `Este e-mail já está em uso`;
+                } else if (resposta.status == 500) {
+                    span_errormsg.innerHTML = `Erro ao se conectar com o servidor`;
+                } else {
+                    field.classList.remove('field');
+                    div_field.innerHTML = `
+                    <div>
+                        <h2>Senha</h2>
+                        <input id="input_password" onkeyup="verificarSenha()" type="password" placeholder="********">
+                        <span id="span_errormsg" style="color: red;"></span>
+                    </div>
+                    <div class="buttons">
+                        <button class="back" onclick="voltarCampoEmail()">Voltar</button>
+                        <button class="next" onclick="campoConfirmarSenha()">Próximo</button>
+                    </div>
+                    `;
+                    field.classList.add('field');
+
+                    email = emailVar;
+                }
+            })
         };
     };
 
@@ -159,7 +178,7 @@
         var confSenha = input_passwordConfirm.value;
 
         if (confSenha != senha) {
-            span_errormsg.innerHTML= `As senhas devem ser iguais`
+            span_errormsg.innerHTML = `As senhas devem ser iguais`
         } else {
             var nomePH = ['Caio', 'Fernando', 'Vivian', 'Thiago', 'Mônica', 'Eduardo'];
             var sobrenomePH = ['Henrique', 'Brandão', 'Silva', 'Gomes', 'Herrero', 'Verri']
@@ -278,36 +297,38 @@
     };
 
     function enviarBanco() {
-        var dtNascVar = input_date.value;
-        var ano = Number(dtNascVar[0] + dtNascVar[1] + dtNascVar[2] + dtNascVar[3]);
-        if (ano > 2005) {
-            span_errormsg.innerHTML = `É preciso ser maior de 18`;
-        } else {
-            dtNasc = dtNascVar;
+        dtNasc = input_date.value;
+        nome = nome.toLocaleLowerCase();
+        nome = nome.replace(nome[0], nome[0].toLocaleUpperCase());
+        sobrenome = sobrenome.toLocaleLowerCase();
+        sobrenome = sobrenome.replace(sobrenome[0], sobrenome[0].toLocaleUpperCase());
 
-            fetch("/usuario/cadastrar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
-                    nomeServer: nome,
-                    sobrenomeServer: sobrenome,
-                    emailServer: email,
-                    senhaServer: senha,
-                    dtNascServer: dtNasc
-                })
-            }) .then(function(resposta){
-                if(resposta.ok){
-                    
-                    setTimeout(function(){
-                        consol.log(resposta)
-                    },3000)
-                    window.location.href = "login.html"
-                }
-            }) 
-        };
+        fetch("/usuario/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nome,
+                sobrenomeServer: sobrenome,
+                emailServer: email,
+                senhaServer: senha,
+                dtNascServer: dtNasc
+            })
+        }).then(function (resposta) {
+            if (resposta.status == 400) {
+                alert(`Um ou mais dos valores inseridos são inválidos`)
+            } else if (resposta.status == 500) {
+                span_errormsg.innerHTML = `Erro na comunicação com o servidor`
+            } else {
+                if (resposta.ok) {
+
+                    console.log(resposta);
+                    window.location.href = "login.html";
+                };
+            };
+        });
     };
 </script>
