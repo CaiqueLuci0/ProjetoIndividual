@@ -35,6 +35,8 @@ function autenticar(req, res) {
                 console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`);
                 if (resultadoAutenticar.length > 0) {
                     res.json(resultadoAutenticar[0])
+                } else{
+                    res.status(400).send('email ou senha incorretos')
                 }
             }
         )

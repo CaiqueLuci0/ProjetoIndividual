@@ -42,7 +42,7 @@
 }
 
 ul{
-    width: 50%;
+    width: 35%;
     text-decoration: none;
     list-style: none;
     display: flex;
@@ -79,7 +79,7 @@ a{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 12%;
+    width: 20%;
     height: 40%;
     background-color: rgb(54, 54, 54);
     border-radius: 19em;

@@ -27,6 +27,14 @@ router.post("/exibirNiveis", function (req, res) {
     highScoreController.exibirNiveis(req, res);
 });
 
+router.post("/buscarHighScore", function (req, res) {
+    highScoreController.buscarHighScore(req, res);
+});
+
+router.post("/buscarPowerUps", function (req, res) {
+    highScoreController.buscarPowerUps(req, res);
+});
+
 
 
 

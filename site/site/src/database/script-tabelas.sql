@@ -13,8 +13,6 @@ dtNasc DATE NOT NULL
 
 select * from usuario;
 
-delete from highscore where fkUsuario = 1001;
-
 INSERT INTO usuario (nome, sobrenome, email, senha, dtNasc) VALUES
 ('Caique', 'Lucio', 'CAIQUE@GMAIL.COM', 'sptech88', '2004-10-26');
 
@@ -26,7 +24,7 @@ CONSTRAINT pkHighScore FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario)
 );
 
 INSERT INTO highScore (fkUsuario, qtdClicks, qtdPontos) VALUES
-(1000, 10000, 500000);
+(1000, 10000, 5000);
 
 CREATE TABLE powerUp(
 idPowerUp VARCHAR(20) PRIMARY KEY
@@ -50,7 +48,7 @@ CONSTRAINT fkPowerUp FOREIGN KEY (fkPowerUp) REFERENCES powerUp(idPowerUp),
 CONSTRAINT pkNivelPowerUp PRIMARY KEY (fkUsuario, fkPowerUp)
 );
 
--- Substituir na API o primeiro valor pelo id do usuário guardado no session storage e o terceiro pelo nível guardado na variável !
+-- Substituir na API o primeiro valor pelo id do usuário guardado no session storage e o terceiro pelo nível guardado na variável
 
 INSERT INTO nivelPowerUp (fkUsuario, fkPowerUp, nivel) VALUES
 (1000, 'execucao', 5),
@@ -64,16 +62,3 @@ INSERT INTO nivelPowerUp (fkUsuario, fkPowerUp, nivel) VALUES
 CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'usuario';
 GRANT select, insert, delete, update ON musclerise.* TO 'usuario'@'localhost';
 FLUSH PRIVILEGES;
-
-select * from nivelPowerUp;
-
-select * from highScore;
-
- INSERT INTO nivelPowerUp (fkUsuario, fkPowerUp, nivel) VALUES
-	(1005, 'execucao', 0),
-      (1005, 'creatina', 0),
-      (1005, 'whey', 0),
-      (1005, 'cardio', 0),
-      (1005, 'pesado', 0),
-     (1005, 'dieta', 0),
-      (1005, 'disciplina', 0);

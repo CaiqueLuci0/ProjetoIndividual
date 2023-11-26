@@ -40,46 +40,41 @@
             console.log("FORM SENHA: ", senha);
 
             fetch("/usuario/autenticar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: email,
-                senhaServer: senha
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: email,
+                    senhaServer: senha
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.status == 400) {
+
+                    span_errormsg.innerHTML = 'E-mail ou senha inválida'
+
+                } else if(resposta.status == 200) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.email = json.email;
+                        sessionStorage.nome = json.nome;
+                        sessionStorage.sobrenome = json.sobrenome;
+                        sessionStorage.idUsuario = json.idUsuario;
+
+                        window.location = "perfil.html";
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
             })
-        }) .then(function (resposta) {
-            console.log("ESTOU NO THEN DO entrar()!")
 
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.email = json.email;
-                    sessionStorage.nome = json.nome;
-                    sessionStorage.sobrenome = json.sobrenome;
-                    sessionStorage.idUsuario = json.idUsuario;
-                    
-                    window.location = "perfil.html";
-                });
-
-            } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-                
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    span_errormsg.innerHTML = texto;
-                });
-            }
-
-        }).catch(function (erro) {
-            console.log(erro);
-        })
-
-        return false;
+            return false;
         };
     };
 </script>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="perfil.css">
 </head>
 
-<body onload="exibirUserName(), exibirPontos()">
+<body>
     <section class="main">
         <div class="header">
             <div class="foto_nome">
@@ -17,6 +17,7 @@
                     <span id="span_userName">UserName</span>#<span id="spanId">0001</span>
                 </h1>
             </div>
+            <button class="sair" onclick="limparSessão()">Sair</button>
         </div>
         <div class="kpis">
             <div class="niveis">
@@ -41,7 +42,7 @@
 
                 <div class="divisaoNiveis">
                     <div class="nivel">
-                        <h3>Melhoria de Cardio</h3>
+                        <h3>Melhoria de Cárdio</h3>
                         <img class="iconePW" src="assets/img/cardio.png">
                         <h3>Nível: <span id="span_nivelCardio">0</span></h3>
                     </div>
@@ -77,7 +78,7 @@
             </div>
             <div class="conquistas">
                 <div class="botoes">
-                    <div class="botao">Leaderboard</div>
+                    <div class="botao" onclick="chamarLeaderBoard()">Leaderboard</div>
                     <div onclick="chamarClicker()" class="botao">Novo Jogo</div>
                 </div>
                 <h1>Conquistas</h1>
@@ -92,6 +93,22 @@
 </html>
 
 <script>
+
+    if (
+        sessionStorage.nome == undefined ||
+        sessionStorage.sobrenome == undefined ||
+        sessionStorage.idUsuario == undefined
+    ) {
+        alert('Erro ao carregar seus dados. Faça login novamente.')
+        window.location.href = 'login.html'
+    } else {
+        exibirUserName();
+    }
+
+    function limparSessão() {
+        sessionStorage.clear();
+        window.location = 'index.html'
+    }
 
     function exibirPontos() {
         fetch("/highScore/verificarSave", {
@@ -115,8 +132,8 @@
                     });
                     span_qtdClicks.innerHTML = sessionStorage.clicksUsuario;
                     span_pontos.innerHTML = sessionStorage.pontosUsuario;
-
                     exibirNiveis();
+
                 } else if (resposta.status == 204) {
                     // avisar que ele ainda não tem save
                     alert('Você ainda não jogou nenhúma vez, por isso todos os seus níveis estão em 0');
@@ -124,7 +141,7 @@
                     alert('erro 500');
                 }
             }
-        );
+        )
     };
 
     function exibirNiveis() {
@@ -139,7 +156,7 @@
         }).then(
             function (resposta) {
                 if (resposta.status == 201) {
-                    
+
 
                     resposta.json().then(json => {
                         console.log(json);
@@ -152,11 +169,10 @@
                         sessionStorage.nivelPesado = json[5].nivel;
                         sessionStorage.nivelWhey = json[6].nivel;
                     });
-
                     validarConquistas();
                 }
             }
-        );
+        )
     };
 
     function validarConquistas() {
@@ -333,7 +349,7 @@
             `
         };
 
-        if(qtdClicks >= 10000){
+        if (qtdClicks >= 10000) {
             container_conquistas.innerHTML += `
             <div class="conquista">
                         <img class="iconeConquista" src="assets/img/click10000.png" alt="">
@@ -348,15 +364,23 @@
 
     };
 
+
     function exibirUserName() {
         var nome = sessionStorage.nome;
         var sobrenome = sessionStorage.sobrenome;
         span_userName.innerHTML = nome + '_' + sobrenome.replaceAll(" ", "_");
         var id = sessionStorage.idUsuario;
         spanId.innerHTML = id
+
+        exibirPontos();
     }
 
     function chamarClicker() {
         window.location.href = "clicker.html"
+
+    }
+
+    function chamarLeaderBoard() {
+        window.location.href = "leaderboard.html"
     }
 </script>

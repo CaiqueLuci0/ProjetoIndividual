@@ -123,9 +123,45 @@ function verificarSave(req,res){
         )
     };
 
+    function buscarHighScore(req,res){
+        console.log('estou no controller')
+        var campo = req.body.selectServer;
+
+        highScoreModel.buscarHighScore(campo)
+            .then(
+                function(resultadoBusca){
+                    res.json(resultadoBusca);
+                }
+            ) .catch(
+                function(erro){
+                    console.log(erro.sqlMessage);
+                    res.status(500);
+                }
+            );
+    };
+
+    function buscarPowerUps(req, res){
+        console.log('estou no controller')
+        var campo = req.body.selectServer;
+
+        highScoreModel.buscarPowerUps(campo)
+            .then(
+                function(resultadoBusca){
+                    res.json(resultadoBusca);
+                }
+            ) .catch(
+                function(erro){
+                    console.log(erro.sqlMessage);
+                    res.status(500);
+                }
+            );
+    }
+
 module.exports = {
     verificarSave,
     cadastrarHighScore,
+    buscarHighScore,
+    buscarPowerUps,
     cadastrarPowerUps,
     apagarHighScore,
     apagarPowerUps,

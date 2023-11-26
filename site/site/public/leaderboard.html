@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="leaderboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="gerarDados();">
+    <section class="main">
+        <div class="titulo">
+            <h1><img src="assets/img/trofeu.png" width="50px" alt=""><i>Leaderboard</i></h1>
+        </div>
+        <div class="select">
+            Exibir colocação por:<select id="select_powerUp">
+                <option value="qtdPontos">Quantidade de Pontos</option>
+                <option value="qtdClicks">Quantidade de Clicks</option>
+                <option value="execucao">Nível de Execução</option>
+                <option value="creatina">Nível de Creatina</option>
+                <option value="whey">Nível de Whey</option>
+                <option value="dieta">Nível de Dieta</option>
+                <option value="pesado">Nível de Treino</option>
+                <option value="cardio">Nível de Cardido</option>
+                <option value="disciplina">Nível de Disciplina</option>
+            </select>
+        </div>
+        <div class="card">
+            <canvas id="myChart"></canvas>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+
+    var ultimoSelect = select_powerUp.value;
+    let pontos = [];
+    let nomes = [];
+    let medida = '';
+    let grafico = new Chart(document.getElementById('myChart'), {
+        type: 'bar',
+        data: {
+            labels: nomes,
+            datasets: [{
+                label: 'pontos/níveis',
+                data: pontos,
+                borderWidth: 1,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    function gerarDados() {
+        var select = select_powerUp.value;
+        if (select != ultimoSelect) {
+            ultimoSelect = select;
+        };
+
+        if (ultimoSelect == 'qtdPontos' || ultimoSelect == 'qtdClicks') {
+
+            fetch("/highScore/buscarHighScore", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    selectServer: ultimoSelect
+                })
+            }).then(
+                function (resposta) {
+                    if (resposta.ok) {
+                        resposta.json().then(json => {
+                            console.log(json);
+                            console.log(JSON.stringify(json));
+                            sessionStorage.grafico = JSON.stringify(json);
+                        });
+                    };
+                }
+            ).then(
+                () => {
+                    let dados = JSON.parse(sessionStorage.grafico);
+                    console.log('dados:' + dados)
+                    atualizarGrafico(dados);
+                }
+            );
+        } else if(
+            ultimoSelect == 'creatina' ||
+            ultimoSelect == 'execucao' || 
+            ultimoSelect == 'whey' || 
+            ultimoSelect == 'dieta' || 
+            ultimoSelect == 'pesado' || 
+            ultimoSelect == 'cardio' || 
+            ultimoSelect == 'disciplina' 
+            ){
+                fetch("/highScore/buscarPowerUps", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    selectServer: ultimoSelect
+                })
+            }).then(
+                function (resposta) {
+                    if (resposta.ok) {
+                        resposta.json().then(json => {
+                            console.log(json);
+                            console.log(JSON.stringify(json));
+                            sessionStorage.grafico = JSON.stringify(json);
+                        });
+                    };
+                }
+            ).then(
+                () => {
+                    let dados = JSON.parse(sessionStorage.grafico);
+                    console.log('dados:' + dados)
+                    atualizarGrafico(dados);
+                }
+            );
+        }
+    };
+
+    var dadosAnteriores = '';
+
+    function atualizarGrafico(dados) {
+        if (JSON.stringify(dados) != dadosAnteriores) {
+            dadosAnteriores = JSON.stringify(dados);
+            console.log('dados:' + dados)
+            dados.forEach(element => {
+                pontos.push(element.ponto)
+                nomes.push(element.nome + '_' + element.sobrenome.replaceAll(' ', '_') + '#' + element.idUsuario);
+            });
+
+            grafico.update();
+            
+        };
+
+        setTimeout(limparDados(dados), 5000);
+    };
+
+    function limparDados(dados) {
+        if(JSON.stringify(dados) == dadosAnteriores){
+            pontos.splice(0, pontos.length);
+            nomes.splice(0, nomes.length);
+        };
+        
+        setTimeout(gerarDados, 1000);
+    };
+
+
+</script>

@@ -35,6 +35,7 @@
 }
 
 .foto_nome{
+    margin-left: 5%;
     width: 90%;
     height: 100%;
     display: flex;
@@ -149,4 +150,15 @@
     padding-left: 2%;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.sair{
+    margin-right: 5%;
+    width: 100px;
+    height: 30px;
+    background-color: #fe2b43;
+    color: gold;
+    border: solid 2px gold;
+    cursor: pointer;
+
 }

@@ -63,10 +63,39 @@ function exibirNiveis(id){
     return database.executar(instrucao);
 }
 
+function buscarHighScore(campo){
+    console.log('estou buscando pelo highScore no model');
+    var instrucao = `
+    SELECT nome, sobrenome, idUsuario, ${campo} AS ponto FROM highScore JOIN usuario ON fkUsuario = idUsuario ORDER BY ${campo} DESC limit 100;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function buscarPowerUps(campo){
+    console.log('estou buscando pelo highScore no model');
+    var instrucao = `
+    SELECT 
+    nome, 
+    sobrenome, 
+    idUsuario, 
+    nivel AS ponto
+    FROM nivelpowerUp 
+    JOIN usuario 
+    ON fkUsuario = idUsuario 
+    WHERE fkPowerUp = '${campo}' 
+    ORDER BY nivel DESC limit 100;
+    `
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 
 module.exports = {
     verificarSave,
     cadastrarHighScore,
+    buscarHighScore,
+    buscarPowerUps,
     cadastrarPowerUps,
     apagarHighScore,
     apagarPowerUps,
