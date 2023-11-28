@@ -94,15 +94,7 @@
                     atualizarGrafico(dados);
                 }
             );
-        } else if(
-            ultimoSelect == 'creatina' ||
-            ultimoSelect == 'execucao' || 
-            ultimoSelect == 'whey' || 
-            ultimoSelect == 'dieta' || 
-            ultimoSelect == 'pesado' || 
-            ultimoSelect == 'cardio' || 
-            ultimoSelect == 'disciplina' 
-            ){
+        } else{
                 fetch("/highScore/buscarPowerUps", {
                 method: "POST",
                 headers: {

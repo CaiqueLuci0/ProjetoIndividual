@@ -217,18 +217,13 @@ a{
     height: 80%;
     border: #fe2b43 3px solid;
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .problem{
     width: 100%;
-    height: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    height: 33% ;
     align-items: center;
+    text-align: center;
 }
 
 
