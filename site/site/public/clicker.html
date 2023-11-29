@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Muscle Rise</title>
     <link rel="stylesheet" href="clicker.css">
 
     <style>
@@ -15,12 +15,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 0;
             text-align: center;
-            width: 200px;
-            height: fit-content;
-            border: solid #fff 1px;
+            width: 0;
+            height: 0;
             color: #fff;
+            overflow: hidden;
         }
 
         .preco_bonus_descricao h3 {
@@ -108,7 +107,7 @@
 
             </div>
             <div id="div_powerUpCreatina" class="powerup" onclick="powerUpCreatina()">
-                <h1>Tomar creatina</h1>
+                <h1>Creatina</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
                     <b>Segundos para o bônus: <span class="segundosPowerUp"></span></b>
@@ -121,7 +120,7 @@
                 </div>
             </div>
             <div id="div_powerUpWhey" class="powerup" onclick="powerUpWhey()">
-                <h1>Tomar Whey</h1>
+                <h1>Whey</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
                     <b>Segundos para o bônus: <span class="segundosPowerUp"></span></b>
@@ -135,7 +134,7 @@
                 </div>
             </div>
             <div id="div_powerUpCardio" class="powerup" onclick="powerUpCardio()">
-                <h1>Fazer Cárdio</h1>
+                <h1>Cárdio</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
                     <b>Segundos para o bônus: <span class="segundosPowerUp"></span></b>
@@ -226,12 +225,13 @@
                     // Salvar
                     cadastrarHighScore();
                 } else {
-                    alert('erro 500');
+                    alert('Erro na comunicação com o servidor');
                 }
             }
         );
     };
-
+    
+    //Apaga o highscore do usuário
     function sobrescrever(){
         fetch("/highScore/apagarHighScore", {
             method: "POST",
@@ -254,6 +254,7 @@
         window.location = 'perfil.html'
     }
 
+    //Apaga os 7 powerUps do usuário
     function apagarPowerUps(){
         fetch("/highScore/apagarPowerUps", {
             method: "POST",
@@ -270,7 +271,7 @@
                 };
             }
         );
-    }
+    };
 
     function cadastrarHighScore() {
         console.log('Estou no cadastrar HighScore do front')
@@ -610,18 +611,16 @@
         div_descricaoPowerUpClick.style.height = 'fit-content';
         div_descricaoPowerUpClick.style.left = (x - div_descricaoPowerUpClick.clientWidth - 20) + "px";
         div_descricaoPowerUpClick.style.top = y + "px";
-        div_descricaoPowerUpClick.style.opacity = 1;
+        div_descricaoPowerUpClick.style.border = 'solid #fff 1px';
     });
 
     div_powerUpClick.addEventListener("mouseout", function () {
 
         div_descricaoPowerUpClick.style.width = 0;
         div_descricaoPowerUpClick.style.height = 0;
-        div_descricaoPowerUpClick.style.overflow = 'hidden';
         div_descricaoPowerUpClick.style.left = 0 + "px";
         div_descricaoPowerUpClick.style.top = 0 + "px";
-        div_descricaoPowerUpClick.style.opacity = 0;
-        div_descricaoPowerUpClick.style.opacity = 0;
+        div_descricaoPowerUpClick.style.border = '0px';
     });
 
     //Descrição powerUpCreatina
@@ -638,15 +637,15 @@
         div_descricaoPowerUpCreatina.style.height = 'fit-content';
         div_descricaoPowerUpCreatina.style.left = (x - div_descricaoPowerUpCreatina.clientWidth - 10) + "px";
         div_descricaoPowerUpCreatina.style.top = y + "px";
-        div_descricaoPowerUpCreatina.style.opacity = 1;
+        div_descricaoPowerUpCreatina.style.border = 'solid 1px #fff'
     });
 
     div_powerUpCreatina.addEventListener("mouseout", function () {
         div_descricaoPowerUpCreatina.style.width = 0;
         div_descricaoPowerUpCreatina.style.height = 0;
-        div_descricaoPowerUpCreatina.style.overflow = 'hidden';
         div_descricaoPowerUpCreatina.style.left = 0 + "px";
         div_descricaoPowerUpCreatina.style.top = 0 + "px";
+        div_descricaoPowerUpCreatina.style.border = '0px';
     })
 
     //Descrição powerUpWhey
@@ -661,16 +660,16 @@
         div_descricaoPowerUpWhey.style.height = 'fit-content';
         div_descricaoPowerUpWhey.style.left = (x - div_descricaoPowerUpWhey.clientWidth - 10) + "px";
         div_descricaoPowerUpWhey.style.top = y + "px";
-        div_descricaoPowerUpWhey.style.opacity = 1;
+        div_descricaoPowerUpWhey.style.border = 'solid #fff 1px';
     });
 
     div_powerUpWhey.addEventListener("mouseout", function () {
 
         div_descricaoPowerUpWhey.style.width = 0;
         div_descricaoPowerUpWhey.style.height = 0;
-        div_descricaoPowerUpWhey.style.overflow = 'hidden';
         div_descricaoPowerUpWhey.style.left = 0 + "px";
         div_descricaoPowerUpWhey.style.top = 0 + "px";
+        div_descricaoPowerUpWhey.style.border = '0px';
 
     });
 
@@ -686,16 +685,16 @@
         div_descricaoPowerUpCardio.style.height = 'fit-content';
         div_descricaoPowerUpCardio.style.left = (x - div_descricaoPowerUpCardio.clientWidth - 10) + "px";
         div_descricaoPowerUpCardio.style.top = y + "px";
-        div_descricaoPowerUpCardio.style.opacity = 1;
+        div_descricaoPowerUpCardio.style.border = '1px solid #fff';
     });
 
     div_powerUpCardio.addEventListener("mouseout", function () {
 
         div_descricaoPowerUpCardio.style.width = 0;
         div_descricaoPowerUpCardio.style.height = 0;
-        div_descricaoPowerUpCardio.style.overflow = 'hidden';
         div_descricaoPowerUpCardio.style.left = 0 + "px";
         div_descricaoPowerUpCardio.style.top = 0 + "px";
+        div_descricaoPowerUpCardio.style.border = '0px';
     });
 
     //Descrição powerUpTreinoPesado
@@ -710,16 +709,16 @@
         div_descricaoPowerUpTreinoPesado.style.height = 'fit-content';
         div_descricaoPowerUpTreinoPesado.style.left = (x - div_descricaoPowerUpTreinoPesado.clientWidth - 10) + "px";
         div_descricaoPowerUpTreinoPesado.style.top = y + "px";
-        div_descricaoPowerUpTreinoPesado.style.opacity = 1;
+        div_descricaoPowerUpTreinoPesado.style.border = '#fff solid 1px'
     });
 
     div_powerUpTreinoPesado.addEventListener("mouseout", function () {
 
         div_descricaoPowerUpTreinoPesado.style.width = 0;
         div_descricaoPowerUpTreinoPesado.style.height = 0;
-        div_descricaoPowerUpTreinoPesado.style.overflow = 'hidden';
         div_descricaoPowerUpTreinoPesado.style.left = 0 + "px";
         div_descricaoPowerUpTreinoPesado.style.top = 0 + "px";
+        div_descricaoPowerUpTreinoPesado.style.border = '0px';
     });
 
     // Dieta 
@@ -735,16 +734,16 @@
         div_descricaoPowerUpDieta.style.height = 'fit-content';
         div_descricaoPowerUpDieta.style.left = (x - div_descricaoPowerUpDieta.clientWidth - 10) + "px";
         div_descricaoPowerUpDieta.style.top = y + "px";
-        div_descricaoPowerUpDieta.style.opacity = 1;
+        div_descricaoPowerUpDieta.style.border = 'solid #fff 1px';
     });
 
     div_powerUpDieta.addEventListener("mouseout", function () {
 
         div_descricaoPowerUpDieta.style.width = 0;
         div_descricaoPowerUpDieta.style.height = 0;
-        div_descricaoPowerUpDieta.style.overflow = 'hidden';
         div_descricaoPowerUpDieta.style.left = 0 + "px";
         div_descricaoPowerUpDieta.style.top = 0 + "px";
+        div_descricaoPowerUpDieta.style.border = '0px';
     });
 
     // Disciplina
@@ -759,15 +758,16 @@
         div_descricaoPowerUpDisciplina.style.height = 'fit-content';
         div_descricaoPowerUpDisciplina.style.left = (x - div_descricaoPowerUpDisciplina.clientWidth - 10) + "px";
         div_descricaoPowerUpDisciplina.style.top = (y - 10) + "px";
-        div_descricaoPowerUpDisciplina.style.opacity = 1;
+        div_descricaoPowerUpDisciplina.style.border = 'solid #fff 1px';
+        
     });
 
     div_powerUpDisciplina.addEventListener("mouseout", function () {
 
         div_descricaoPowerUpDisciplina.style.width = 0;
         div_descricaoPowerUpDisciplina.style.height = 0;
-        div_descricaoPowerUpDisciplina.style.overflow = 'hidden';
         div_descricaoPowerUpDisciplina.style.left = 0 + "px";
         div_descricaoPowerUpDisciplina.style.top = 0 + "px";
+        div_descricaoPowerUpDisciplina.style.border = '0px';
     });
 </script>

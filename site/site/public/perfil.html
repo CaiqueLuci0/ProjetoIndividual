@@ -130,8 +130,12 @@
                         sessionStorage.clicksUsuario = json.qtdClicks;
                         sessionStorage.pontosUsuario = json.qtdPontos;
                     });
-                    span_qtdClicks.innerHTML = sessionStorage.clicksUsuario;
-                    span_pontos.innerHTML = sessionStorage.pontosUsuario;
+
+                    setTimeout(() => {
+                        span_qtdClicks.innerHTML = sessionStorage.clicksUsuario;
+                        span_pontos.innerHTML = sessionStorage.pontosUsuario;
+                    }, 100);
+                    
                     exibirNiveis();
 
                 } else if (resposta.status == 204) {
@@ -161,15 +165,16 @@
                     resposta.json().then(json => {
                         console.log(json);
                         console.log(JSON.stringify(json));
-                        sessionStorage.nivelCardio = json[0].nivel;
+                        sessionStorage.nivelCardio = json[3].nivel;
                         sessionStorage.nivelCreatina = json[1].nivel;
-                        sessionStorage.nivelDieta = json[2].nivel;
-                        sessionStorage.nivelDisciplina = json[3].nivel;
-                        sessionStorage.nivelExecucao = json[4].nivel;
-                        sessionStorage.nivelPesado = json[5].nivel;
-                        sessionStorage.nivelWhey = json[6].nivel;
+                        sessionStorage.nivelDieta = json[5].nivel;
+                        sessionStorage.nivelDisciplina = json[6].nivel;
+                        sessionStorage.nivelExecucao = json[0].nivel;
+                        sessionStorage.nivelPesado = json[4].nivel;
+                        sessionStorage.nivelWhey = json[2].nivel;
                     });
-                    validarConquistas();
+
+                    setTimeout(validarConquistas, 100);
                 }
             }
         )

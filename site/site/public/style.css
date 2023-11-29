@@ -88,13 +88,11 @@ a{
 .mainInfos{
     width: 50%;
     height: 70%;
-    background-color: rgba(0, 0, 0, 0.192);
     display: flex;
     align-items: center;
     margin-top: 70px;
     margin-left: 3%;
     border-radius: 5%;
-    border: #fe2b43 solid 3px;
     text-align: center;
 }
 .mainInfos h1{
@@ -117,7 +115,7 @@ a{
 
 .mainInfos h2{
     font-size: 30px;
-    color: #fff;
+    color: #000;
     font-weight: 1000;
 }
 
@@ -224,6 +222,7 @@ a{
     height: 33% ;
     align-items: center;
     text-align: center;
+    display: flex; flex-direction: column;
 }
 
 

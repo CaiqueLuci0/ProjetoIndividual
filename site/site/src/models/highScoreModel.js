@@ -24,13 +24,13 @@ function cadastrarPowerUps(id, execucao, creatina, whey, cardio, treino, dieta, 
     console.log("estou no model cadastrando powerUp")
     var instrucao = `
     INSERT INTO nivelPowerUp (fkUsuario, fkPowerUp, nivel) VALUES
-    (${id}, 'execucao', ${execucao}),
-    (${id}, 'creatina', ${creatina}),
-    (${id}, 'whey', ${whey}),
-    (${id}, 'cardio', ${cardio}),
-    (${id}, 'pesado', ${treino}),
-    (${id}, 'dieta', ${dieta}),
-    (${id}, 'disciplina', ${disciplina});
+    (${id}, '1', ${execucao}),
+    (${id}, '2', ${creatina}),
+    (${id}, '3', ${whey}),
+    (${id}, '4', ${cardio}),
+    (${id}, '5', ${treino}),
+    (${id}, '6', ${dieta}),
+    (${id}, '7', ${disciplina});
     `
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

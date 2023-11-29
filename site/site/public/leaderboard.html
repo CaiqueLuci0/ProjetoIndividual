@@ -19,13 +19,13 @@
             Exibir colocação por:<select id="select_powerUp">
                 <option value="qtdPontos">Quantidade de Pontos</option>
                 <option value="qtdClicks">Quantidade de Clicks</option>
-                <option value="execucao">Nível de Execução</option>
-                <option value="creatina">Nível de Creatina</option>
-                <option value="whey">Nível de Whey</option>
-                <option value="dieta">Nível de Dieta</option>
-                <option value="pesado">Nível de Treino</option>
-                <option value="cardio">Nível de Cardido</option>
-                <option value="disciplina">Nível de Disciplina</option>
+                <option value="1">Nível de Execução</option>
+                <option value="2">Nível de Creatina</option>
+                <option value="3">Nível de Whey</option>
+                <option value="6">Nível de Dieta</option>
+                <option value="5">Nível de Treino</option>
+                <option value="4">Nível de Cardido</option>
+                <option value="7">Nível de Disciplina</option>
             </select>
         </div>
         <div class="card">
@@ -38,7 +38,7 @@
 
 <script>
 
-    var ultimoSelect = select_powerUp.value;
+    var ultimoSelect = '';
     let pontos = [];
     let nomes = [];
     let medida = '';
@@ -63,69 +63,78 @@
 
     function gerarDados() {
         var select = select_powerUp.value;
-        if (select != ultimoSelect) {
+        if (select == ultimoSelect) {
+            console.log('Primeiro if')
+            setTimeout(gerarDados, 500);
+
+        } else {
+
+            console.log('Else do primeiro if')
+
             ultimoSelect = select;
-        };
 
-        if (ultimoSelect == 'qtdPontos' || ultimoSelect == 'qtdClicks') {
+            if (ultimoSelect == 'qtdPontos' || ultimoSelect == 'qtdClicks') {
 
-            fetch("/highScore/buscarHighScore", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    selectServer: ultimoSelect
-                })
-            }).then(
-                function (resposta) {
-                    if (resposta.ok) {
-                        resposta.json().then(json => {
-                            console.log(json);
-                            console.log(JSON.stringify(json));
-                            sessionStorage.grafico = JSON.stringify(json);
-                        });
-                    };
-                }
-            ).then(
-                () => {
-                    let dados = JSON.parse(sessionStorage.grafico);
-                    console.log('dados:' + dados)
-                    atualizarGrafico(dados);
-                }
-            );
-        } else{
+                fetch("/highScore/buscarHighScore", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        selectServer: ultimoSelect
+                    })
+                }).then(
+                    function (resposta) {
+                        if (resposta.ok) {
+                            resposta.json().then(json => {
+                                console.log(json);
+                                console.log(JSON.stringify(json));
+                                sessionStorage.grafico = JSON.stringify(json);
+                            });
+                        };
+                    }
+                ).then(
+                    setTimeout(() => {
+                        let dados = JSON.parse(sessionStorage.grafico);
+                        console.log('dados:' + dados)
+                        atualizarGrafico(dados);
+                    }, 100)
+                );
+            } else {
                 fetch("/highScore/buscarPowerUps", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    selectServer: ultimoSelect
-                })
-            }).then(
-                function (resposta) {
-                    if (resposta.ok) {
-                        resposta.json().then(json => {
-                            console.log(json);
-                            console.log(JSON.stringify(json));
-                            sessionStorage.grafico = JSON.stringify(json);
-                        });
-                    };
-                }
-            ).then(
-                () => {
-                    let dados = JSON.parse(sessionStorage.grafico);
-                    console.log('dados:' + dados)
-                    atualizarGrafico(dados);
-                }
-            );
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        selectServer: ultimoSelect
+                    })
+                }).then(
+                    function (resposta) {
+                        if (resposta.ok) {
+                            resposta.json().then(json => {
+                                console.log(json);
+                                console.log(JSON.stringify(json));
+                                sessionStorage.grafico = JSON.stringify(json);
+                            });
+                        };
+                    }
+                ).then(
+                    setTimeout(() => {
+                        let dados = JSON.parse(sessionStorage.grafico);
+                        console.log('dados:' + dados)
+                        atualizarGrafico(dados);
+                    }, 100)
+                    
+                );
+            }
         }
     };
 
     var dadosAnteriores = '';
 
     function atualizarGrafico(dados) {
+
         if (JSON.stringify(dados) != dadosAnteriores) {
             dadosAnteriores = JSON.stringify(dados);
             console.log('dados:' + dados)
@@ -135,19 +144,19 @@
             });
 
             grafico.update();
-            
+
         };
 
-        setTimeout(limparDados(dados), 5000);
+        setTimeout(limparDados(dados), 100);
     };
 
     function limparDados(dados) {
-        if(JSON.stringify(dados) == dadosAnteriores){
+        if (JSON.stringify(dados) == dadosAnteriores) {
             pontos.splice(0, pontos.length);
             nomes.splice(0, nomes.length);
         };
-        
-        setTimeout(gerarDados, 1000);
+
+        setTimeout(gerarDados, 100);
     };
 
 
