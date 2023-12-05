@@ -38,11 +38,10 @@
 
 <script>
 
-    var ultimoSelect = '';
-    let pontos = [];
-    let nomes = [];
-    let medida = '';
-    let grafico = new Chart(document.getElementById('myChart'), {
+    var pontos = [];
+    var nomes = [];
+    var medida = '';
+    var grafico = new Chart(document.getElementById('myChart'), {
         type: 'bar',
         data: {
             labels: nomes,
@@ -63,17 +62,15 @@
 
     function gerarDados() {
         var select = select_powerUp.value;
-        if (select == ultimoSelect) {
-            console.log('Primeiro if')
-            setTimeout(gerarDados, 500);
+        // if (select == selectAtual) {
 
-        } else {
+        //     console.log('Primeiro if')
+        //     setTimeout(gerarDados, 500);
 
-            console.log('Else do primeiro if')
+        // } else {
 
-            ultimoSelect = select;
 
-            if (ultimoSelect == 'qtdPontos' || ultimoSelect == 'qtdClicks') {
+            if (select == 'qtdPontos' || select == 'qtdClicks') {
 
                 fetch("/highScore/buscarHighScore", {
                     method: "POST",
@@ -81,7 +78,7 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        selectServer: ultimoSelect
+                        selectServer: select
                     })
                 }).then(
                     function (resposta) {
@@ -95,8 +92,8 @@
                     }
                 ).then(
                     setTimeout(() => {
-                        let dados = JSON.parse(sessionStorage.grafico);
-                        console.log('dados:' + dados)
+                        var dados = JSON.parse(sessionStorage.grafico);
+                        console.log('dados:' + dados);
                         atualizarGrafico(dados);
                     }, 100)
                 );
@@ -107,7 +104,7 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        selectServer: ultimoSelect
+                        selectServer: select
                     })
                 }).then(
                     function (resposta) {
@@ -121,21 +118,22 @@
                     }
                 ).then(
                     setTimeout(() => {
-                        let dados = JSON.parse(sessionStorage.grafico);
+                        var dados = JSON.parse(sessionStorage.grafico);
                         console.log('dados:' + dados)
                         atualizarGrafico(dados);
                     }, 100)
-                    
+
                 );
             }
         }
-    };
+    // };
 
     var dadosAnteriores = '';
 
     function atualizarGrafico(dados) {
 
         if (JSON.stringify(dados) != dadosAnteriores) {
+
             dadosAnteriores = JSON.stringify(dados);
             console.log('dados:' + dados)
             dados.forEach(element => {
@@ -151,12 +149,11 @@
     };
 
     function limparDados(dados) {
-        if (JSON.stringify(dados) == dadosAnteriores) {
-            pontos.splice(0, pontos.length);
-            nomes.splice(0, nomes.length);
-        };
 
-        setTimeout(gerarDados, 100);
+        pontos.splice(0, pontos.length);
+        nomes.splice(0, nomes.length);
+
+        setTimeout(gerarDados, 500);
     };
 
 

@@ -38,6 +38,12 @@ INSERT INTO powerUp (idPowerUp, nome) VALUES
 (6, 'dieta'),
 (7, 'disciplina');
 
+update highscore set qtdPontos = 5000 where fkUsuario = 1000;
+
+delete from nivelPowerUp WHERE fkUsuario = 1028;
+delete from highScore where fkUsuario = 1028;
+delete from usuario where idUsuario = 1028;
+
 CREATE TABLE nivelPowerUp(
 fkUsuario INT,
 fkPowerUp INT,
@@ -61,3 +67,22 @@ INSERT INTO nivelPowerUp (fkUsuario, fkPowerUp, nivel) VALUES
 CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'usuario';
 GRANT select, insert, delete, update ON musclerise.* TO 'usuario'@'localhost';
 FLUSH PRIVILEGES;
+
+-- SELECTS 
+
+SELECT * FROM usuario;
+
+SELECT * FROM highScore;
+
+SELECT * FROM nivelPowerUp;
+
+SELECT * FROM powerUp;
+
+SELECT * 
+FROM usuario
+JOIN highScore hs
+ON hs.fkUsuario = idUsuario
+JOIN nivelPowerUp npu
+ON hs.fkUsuario = npu.fkUsuario
+JOIN powerUp
+ON npu.fkPowerUp = idPowerUp;

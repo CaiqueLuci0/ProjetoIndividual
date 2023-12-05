@@ -9,7 +9,7 @@
 
     <style>
         .preco_bonus_descricao {
-            background-color: rgba(0, 0, 0, .6);
+            background-color: #fe2b4488;
             font-size: 15px;
             position: absolute;
             display: flex;
@@ -73,7 +73,7 @@
             border-radius: 19em;
             color: #fff;
             font-size: 30px;
-            background-color: green;
+            background-color: #fe2b44;
             cursor: pointer;
         }
 
@@ -87,13 +87,13 @@
                 <div id="botao_enviarProBanco" onclick="EnviarParaOBanco()">Encerrar sessão</div>
             </div>
             <div class="clicker">
-                <h1 style="color: green ;">Pontos: <span id="span_pontos" style="color: #fff;">0</span></h1>
+                <h1 style="color: #fe2b44, ;">Pontos: <span id="span_pontos" style="color: #fff;">0</span></h1>
                 <img id="personagem" style="width: 100px; height:300px; cursor: pointer;" onclick="clickComum()"
                     src="assets/img/estagio1.png">
             </div>
         </div>
         <div class="container2">
-            <div id="div_powerUpClick" class="powerup" onclick="powerUpclick()">
+            <div id="div_powerUpClick" style="background-image: url(assets/img/bgExecucao.png) ;" class="powerup" onclick="powerUpclick()">
                 <h1>Melhorar execução dos movimentos</h1>
 
                 <div class="preco_bonus">
@@ -106,7 +106,7 @@
                 </div>
 
             </div>
-            <div id="div_powerUpCreatina" class="powerup" onclick="powerUpCreatina()">
+            <div id="div_powerUpCreatina" style="background-image: url(assets/img/bgCreatina.png);" class="powerup" onclick="powerUpCreatina()">
                 <h1>Creatina</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
@@ -119,7 +119,7 @@
                     </div>
                 </div>
             </div>
-            <div id="div_powerUpWhey" class="powerup" onclick="powerUpWhey()">
+            <div id="div_powerUpWhey" style="background-image: url(assets/img/bgWhey.png);" class="powerup" onclick="powerUpWhey()">
                 <h1>Whey</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
@@ -133,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <div id="div_powerUpCardio" class="powerup" onclick="powerUpCardio()">
+            <div id="div_powerUpCardio" style="background-image: url(assets/img/bgCardio.png);" class="powerup" onclick="powerUpCardio()">
                 <h1>Cárdio</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
@@ -148,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            <div id="div_powerUpTreinoPesado" class="powerup" onclick="powerUpTreinoPesado()">
+            <div id="div_powerUpTreinoPesado" style="background-image: url(assets/img/bgTreinoPesado.png);" class="powerup" onclick="powerUpTreinoPesado()">
                 <h1>Treinar pesado</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
             </div>
-            <div id="div_powerUpDieta" class="powerup" onclick="powerUpDieta()">
+            <div id="div_powerUpDieta" style="background-image: url(assets/img/bgDieta.png);" class="powerup" onclick="powerUpDieta()">
                 <h1>Dieta</h1>
                 <div class="preco_bonus">
                     <b>Preço: <span class="precoPowerUp"></span></b>
@@ -611,7 +611,7 @@
         div_descricaoPowerUpClick.style.height = 'fit-content';
         div_descricaoPowerUpClick.style.left = (x - div_descricaoPowerUpClick.clientWidth - 20) + "px";
         div_descricaoPowerUpClick.style.top = y + "px";
-        div_descricaoPowerUpClick.style.border = 'solid #fff 1px';
+        div_descricaoPowerUpClick.style.border = 'solid gold 1px';
     });
 
     div_powerUpClick.addEventListener("mouseout", function () {
@@ -637,7 +637,7 @@
         div_descricaoPowerUpCreatina.style.height = 'fit-content';
         div_descricaoPowerUpCreatina.style.left = (x - div_descricaoPowerUpCreatina.clientWidth - 10) + "px";
         div_descricaoPowerUpCreatina.style.top = y + "px";
-        div_descricaoPowerUpCreatina.style.border = 'solid 1px #fff'
+        div_descricaoPowerUpCreatina.style.border = 'solid 1px gold'
     });
 
     div_powerUpCreatina.addEventListener("mouseout", function () {
@@ -660,7 +660,7 @@
         div_descricaoPowerUpWhey.style.height = 'fit-content';
         div_descricaoPowerUpWhey.style.left = (x - div_descricaoPowerUpWhey.clientWidth - 10) + "px";
         div_descricaoPowerUpWhey.style.top = y + "px";
-        div_descricaoPowerUpWhey.style.border = 'solid #fff 1px';
+        div_descricaoPowerUpWhey.style.border = 'solid gold 1px';
     });
 
     div_powerUpWhey.addEventListener("mouseout", function () {
@@ -685,7 +685,7 @@
         div_descricaoPowerUpCardio.style.height = 'fit-content';
         div_descricaoPowerUpCardio.style.left = (x - div_descricaoPowerUpCardio.clientWidth - 10) + "px";
         div_descricaoPowerUpCardio.style.top = y + "px";
-        div_descricaoPowerUpCardio.style.border = '1px solid #fff';
+        div_descricaoPowerUpCardio.style.border = '1px solid gold';
     });
 
     div_powerUpCardio.addEventListener("mouseout", function () {
@@ -709,7 +709,7 @@
         div_descricaoPowerUpTreinoPesado.style.height = 'fit-content';
         div_descricaoPowerUpTreinoPesado.style.left = (x - div_descricaoPowerUpTreinoPesado.clientWidth - 10) + "px";
         div_descricaoPowerUpTreinoPesado.style.top = y + "px";
-        div_descricaoPowerUpTreinoPesado.style.border = '#fff solid 1px'
+        div_descricaoPowerUpTreinoPesado.style.border = 'gold solid 1px'
     });
 
     div_powerUpTreinoPesado.addEventListener("mouseout", function () {
@@ -734,7 +734,7 @@
         div_descricaoPowerUpDieta.style.height = 'fit-content';
         div_descricaoPowerUpDieta.style.left = (x - div_descricaoPowerUpDieta.clientWidth - 10) + "px";
         div_descricaoPowerUpDieta.style.top = y + "px";
-        div_descricaoPowerUpDieta.style.border = 'solid #fff 1px';
+        div_descricaoPowerUpDieta.style.border = 'solid gold 1px';
     });
 
     div_powerUpDieta.addEventListener("mouseout", function () {
@@ -751,6 +751,7 @@
     var div_descricaoPowerUpDisciplina = document.getElementById('div_descricaoPowerUpDisciplina');
 
     div_powerUpDisciplina.addEventListener("mouseover", function (event) {
+
         var x = event.clientX;
         var y = event.clientY;
 
@@ -758,7 +759,7 @@
         div_descricaoPowerUpDisciplina.style.height = 'fit-content';
         div_descricaoPowerUpDisciplina.style.left = (x - div_descricaoPowerUpDisciplina.clientWidth - 10) + "px";
         div_descricaoPowerUpDisciplina.style.top = (y - 10) + "px";
-        div_descricaoPowerUpDisciplina.style.border = 'solid #fff 1px';
+        div_descricaoPowerUpDisciplina.style.border = 'solid gold 1px';
         
     });
 

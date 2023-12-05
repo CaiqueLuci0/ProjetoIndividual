@@ -5,7 +5,8 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: 'Questrial', sans-serif;
-    color: rgb(100, 100, 100);
+    color: #fe2b44;
+    font-weight: 1000;
 }
 
 #botao_enviarProBanco{
@@ -16,8 +17,8 @@
     justify-content: center;
     align-self: flex-start;
     justify-self: flex-start;
-    background-color: green;
-    border: solid 2px rgb(105, 234, 105);
+    background-color: #fe2b44;
+    border: solid 2px gold;
     border-radius: 3em;
     color: #fff;
     margin-top: 10px;
@@ -62,7 +63,7 @@
     height: 16.66%;
     background-image: url(assets/img/pedra.png);
     border-bottom: solid 5px rgb(100, 100, 100);
-    color: #fff;
+    color: #000;
     display: flex;
     flex-direction: column;
     cursor: pointer;
